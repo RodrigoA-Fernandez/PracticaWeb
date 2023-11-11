@@ -8,7 +8,6 @@
   </head>
   <body>
     <div class="wrapper">
-				<main>	
           <div>
 	          <div class = "guest-box">
               <div>
@@ -35,10 +34,23 @@
               </div>
             </div>
           </div>
-				</main>
-        <a>
+        <a href="https://www.uva.es" class="link-uva">
           <img class="logo" src="assets/logo.png" alt="logo" width = 50>	
         </a>
 		</div> 
   </body>
+  <script>
+    const elements = document.getElementsByClassName('logo');
+
+    for (let i = 0; i<=elements.length;i++){
+      elements[i].addEventListener('animationend',function(e){
+        elements[i].classList.remove("animado");
+      });
+
+      elements[i].addEventListener('mouseover', function(e){
+        elements[i].classList.add("animado");
+      })
+    }
+  </script>
+
 </html>
