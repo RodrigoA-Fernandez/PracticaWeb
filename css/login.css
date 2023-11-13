@@ -1,15 +1,4 @@
-@font-face {
-    font-family: 'Segoe UI Bold';
-    font-style: normal;
-    font-weight: normal;
-    src: url('/fonts/SegoeUI/Segoe UI Bold.woff') format('woff');
-}
-
-:root{
-  --color-secundario: #C61156;
-  --color-secundario-hover: #B40044;
-  --fuente: "Segoe UI Bold"
-}
+@import "constantes.css";
 
 body{
   width: 80%;
@@ -45,6 +34,14 @@ body{
 }
 
 input{
+  width: 90%;
+  color: white;
+  background-color: rgba(0, 0, 0, 0);
+  border-style: none;
+  font-family: var(--fuente);
+}
+input:autofill,
+input:-webkit-auto-fill{
   width: 90%;
   color: white;
   background-color: rgba(0, 0, 0, 0);
@@ -144,3 +141,33 @@ form {
 .boton:hover{
   background: var(--color-secundario-hover);
 }
+
+.mensajeError{
+  border-color: red;
+  border-width: 2px;
+  border-style: solid;
+  font-family: "SegoeUI";
+  align-self: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  flex-direction: row;  
+  align-items: center;
+  margin-top: 10px;
+}
+
+.mensajeError > * {
+  margin: 10px;
+  color: red;
+  font-family: var(--fuente);
+  font-size:0.8em;
+}
+
+.loginIncorrecto{
+  display: none;
+}
+.loginVacio{
+  display: none;
+}
+
+

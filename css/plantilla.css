@@ -1,0 +1,62 @@
+@import "constantes.css";
+:root{
+  --fondo: rgb(242, 243, 247);
+}
+
+html, body, p {
+  margin: 0;
+  margin-top: 0px;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  background: transparent;
+}
+
+body{
+  background-color: var(--fondo);
+}
+
+.navBar{
+  margin-top: -22px;
+  overflow: hidden;
+  background-color: var(--color-secundario);
+  width: 100%;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+}
+
+.navBar a.logo{
+  margin:0;
+  padding:0;
+}
+
+.navBar a.logo:hover{
+  filter: brightness(80%);
+}
+
+.navBar *{
+  height: 50px;
+}
+
+.navBar a{
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  font-family: var(--fuente);
+}
+
+.navBar a:hover{
+    background-color: var(--color-secundario-hover);
+  }
+
+.navBar a.activo{
+  background-color: var(--fondo);
+  color: black;
+}
+

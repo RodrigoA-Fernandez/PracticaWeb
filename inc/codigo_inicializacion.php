@@ -9,11 +9,13 @@
 	define("ERROR_ALTA_PERSONA", 1);
   define("ERROR_CONSULTA_PERSONA", 2);
 	define("NO_EXISTE_PERSONA", 3);
+  define("LOGIN_INCORRECTO",4);
+  define("LOGIN_VACIO", 5);
 	
 	//conexión con base de datos
 	$host = "localhost";
-	$usuario = "rodrigo";
-	$password = "Pcbtpcbt1234";
+	$usuario = "controlador";
+	$password = "contr4Contro!ador";
 	// Conectar con el servidor de bases de datos. Atención! la conexión es local
 	$conexionBD = mysqli_connect($host, $usuario, $password) 
   or 
@@ -23,8 +25,8 @@
 	mysqli_select_db($conexionBD, "NotificadorAvisos");
 	
 	// ya se puede incluir el código de la plantilla y otros ...
-	include "inc/funcionesBD.php";
-  include "inc/plantilla.php";
+  include "plantilla.php";
+  include "funcionesBD.php";
 ?>
 
 
