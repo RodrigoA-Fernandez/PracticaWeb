@@ -18,7 +18,7 @@ body{
 }
 
 .navBar{
-  margin-top: -22px;
+  margin-top: -18px;
   overflow: hidden;
   background-color: var(--color-secundario);
   width: 100%;
@@ -59,4 +59,19 @@ body{
   background-color: var(--fondo);
   color: black;
 }
+
+.navBar .busqueda{
+  margin-left: auto;
+  height: 40px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-right: 10px;
+  border-radius: 40px;
+  background-color: gray;
+}
+
+.busqueda input{
+    height: 40px;
+
+  }
 

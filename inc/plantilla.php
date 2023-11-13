@@ -20,7 +20,7 @@ const TITULO_PAGINA = "Gestor de Avisos UVa";
       </a>
 	    <a href="indice-personas.php" class="activo">Avisos</a>
       <a href="#">Gestor Estudiantes</a>
-      <div class=busqueda>
+      <div class="busqueda">
         <input>
       </div>
     </div>
