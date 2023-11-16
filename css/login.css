@@ -168,6 +168,7 @@ form {
 }
 .loginVacio{
   display: none;
+  align-self: center;
 }
 
 

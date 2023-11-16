@@ -11,6 +11,8 @@
 	define("NO_EXISTE_PERSONA", 3);
   define("LOGIN_INCORRECTO",4);
   define("LOGIN_VACIO", 5);
+  define("LOGIN_ESTUDIANTE", 6);
+  define("LOGIN_PROFESOR",7);
 	
 	//conexión con base de datos
 	$host = "localhost";

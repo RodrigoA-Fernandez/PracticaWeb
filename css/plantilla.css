@@ -3,7 +3,7 @@
   --fondo: rgb(242, 243, 247);
 }
 
-html, body, p {
+html, body {
   margin: 0;
   margin-top: 0px;
   padding: 0;
@@ -18,7 +18,7 @@ body{
 }
 
 .navBar{
-  margin-top: -18px;
+  margin-top: 0;
   overflow: hidden;
   background-color: var(--color-secundario);
   width: 100%;
@@ -40,12 +40,17 @@ body{
   height: 50px;
 }
 
-.navBar a{
+.navBar .enlace{
   float: left;
   display: block;
   color: white;
   text-align: center;
-  padding: 14px 16px;
+  padding-right: 16px; 
+  padding-left: 14px;
+  padding-bottom: 0;
+  padding-top: 25px;
+  margin: 0;
+  align-self: center;
   text-decoration: none;
   font-size: 17px;
   font-family: var(--fuente);
@@ -66,12 +71,41 @@ body{
   margin-top: 5px;
   margin-bottom: 5px;
   margin-right: 10px;
-  border-radius: 40px;
-  background-color: gray;
+  border-radius: 4px;
+  background-color: lightgrey;
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+
+.busqueda *{
+  height: 40px;
+  margin-right:0;
+}
+
+.salida{
+    padding-top: 0;
+    align-self: center;
+    margin-right: 5px;
+    display: flex;
+    padding-left: 5px;
+  }
+
+.salida img{
+  height: 30px;
+  align-self: center;
 }
 
 .busqueda input{
-    height: 40px;
+  padding-left: 0;
+  margin-left: 10px;
+  text-shadow: non;
+  height: 30px;
+  border: none;
+  border-radius: 4px 0 0 4px;
+  background-color: lightgray;
+  outline: none;
+  font-family: var(--fuente);
+}
 
-  }
 

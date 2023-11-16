@@ -44,18 +44,44 @@ function comprobarLogin($conexionBD, $login, $contraseniaHash) {
 			$fila= array();
 		}
 		// destruir la sentencia 
-    mysqli_stmt_close($sentenciaSQL);
   }
   
  
   if ($okFlag) {
     if ($fila["COUNT(*)"] == 1) {
-      $res= OK;
+      return LOGIN_ESTUDIANTE;
     } 
-		return $res;
   } else {
 		return ERROR_CONSULTA_PERSONA;
-	}
+  }
+  
+  $okFlag=mysqli_stmt_prepare($sentenciaSQL, 'SELECT COUNT(*) FROM USUARIO_PROFESOR WHERE Login=? AND Contrasenia=?');
+	if ($okFlag) {
+		// vincular los parámetros para los marcadores 
+		mysqli_stmt_bind_param($sentenciaSQL, "ss", $login, $contraseniaHash);
+
+		// ejecutar la consulta 
+		$okFlag= mysqli_stmt_execute($sentenciaSQL);
+    // obtener los resultados de la consulta 
+		$resultado= mysqli_stmt_get_result($sentenciaSQL);
+		if (mysqli_num_rows($resultado) > 0) {
+			$fila= mysqli_fetch_assoc($resultado);
+		} else {
+			$fila= array();
+		}
+		// destruir la sentencia 
+    mysqli_stmt_close($sentenciaSQL);
+  }
+  
+  if ($okFlag) {
+    if ($fila["COUNT(*)"] == 1) {
+      return LOGIN_PROFESOR;
+    }else{
+      return LOGIN_INCORRECTO;
+    } 
+  } else {
+		return ERROR_CONSULTA_PERSONA;
+  }
 }
 ?>
 

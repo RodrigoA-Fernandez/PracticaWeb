@@ -1,4 +1,4 @@
-﻿<?php 
+<?php 
 const TITULO_PAGINA = "Gestor de Avisos UVa";
 ?>
 <?php function cabeceraPlantilla() { ?>
@@ -13,16 +13,21 @@ const TITULO_PAGINA = "Gestor de Avisos UVa";
 	<link rel="stylesheet" href="css/plantilla.css">
 
 </head>
-<body>
+  <body>
 	  <div class="navBar"> 
       <a class="logo" href="www.uva.es">
         <img src="../assets/logo.png" />
       </a>
-	    <a href="indice-personas.php" class="activo">Avisos</a>
-      <a href="#">Gestor Estudiantes</a>
+	    <a href="indice-personas.php" class="enlace" id="avisos">Avisos</a>
+      <a href="" class = "enlace" id="enviarAvisos">Enviar Avisos</a>
+      <a href="#" class="enlace" id="gestorEstudiantes">Gestor Estudiantes</a>
       <div class="busqueda">
         <input>
+        <img src="../assets/lupa.png">
       </div>
+      <a class="salida" href="../index.php">
+        <img class="salida" src="../assets/logout.png">
+      </a>
     </div>
 
   

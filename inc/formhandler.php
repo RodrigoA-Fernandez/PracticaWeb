@@ -14,6 +14,14 @@ if ( $_SERVER["REQUEST_METHOD"] == "POST") {
       header("Location: ../index.php?falloLogin=loginIncorrecto");
       exit();
       break;
+
+    case LOGIN_ESTUDIANTE:
+      echo("ESTUDIANTE");
+      break;
+
+    case LOGIN_PROFESOR:
+      echo("PROFESOR");
+      break;
     
     default:
       echo("SUUUUUUUUUUUUUUU");
