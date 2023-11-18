@@ -1,0 +1,21 @@
+@import "constantes.ccs";
+
+.mensajes{
+  margin-top: 10px;
+}
+.msg{
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 10px;
+  border-color: black;
+  border: solid;
+  width: 90%;
+  align-self: center;
+  background-color: lightgray;
+  display: flex;
+  flex-wrap: wrap;
+}
+.msg > div{
+  flex: 50%;
+  margin-bottom: 10px;
+}

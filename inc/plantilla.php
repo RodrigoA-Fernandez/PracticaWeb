@@ -18,9 +18,10 @@ const TITULO_PAGINA = "Gestor de Avisos UVa";
       <a class="logo" href="www.uva.es">
         <img src="../assets/logo.png" />
       </a>
-	    <a href="indice-personas.php" class="enlace" id="avisos">Avisos</a>
-      <a href="" class = "enlace" id="enviarAvisos">Enviar Avisos</a>
-      <a href="#" class="enlace" id="gestorEstudiantes">Gestor Estudiantes</a>
+	    <a href="../verAvisosProfesor.php" class="enlace" id="avisosProfesor">Avisos</a>
+	    <a href="../verAvisosAlumno.php" class="enlace" id="avisosEstudiante">Avisos</a>
+      <a href="../enviarAvisos.php" class = "enlace" id="enviarAvisos">Enviar Avisos</a>
+      <a href="../gestionarEstudiantes.php" class="enlace" id="gestorEstudiantes">Gestor Estudiantes</a>
       <div class="busqueda">
         <input>
         <img src="../assets/lupa.png">

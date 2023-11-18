@@ -1,6 +1,7 @@
 <?php include_once "codigo_inicializacion.php"; ?>
 
 <?php
+session_start();
 // var_dump($_SERVER["REQUEST_METHOD"]);
 
 if ( $_SERVER["REQUEST_METHOD"] == "POST") {
@@ -12,20 +13,33 @@ if ( $_SERVER["REQUEST_METHOD"] == "POST") {
   switch ($login) {
     case LOGIN_INCORRECTO:
       header("Location: ../index.php?falloLogin=loginIncorrecto");
+      session_destroy();
       exit();
       break;
 
     case LOGIN_ESTUDIANTE:
-      echo("ESTUDIANTE");
+      $_SESSION['usuario'] = array(
+        "id" => md5(uniqid(rand())),
+        "type" => "estudiante",
+        "username" => $_POST["nombreUsuario"]
+      ); 
+      var_dump($_SESSION);
+      session_write_close();
+      header("Location: ../verAvisosAlumno.php");
+      exit();
       break;
 
     case LOGIN_PROFESOR:
-      echo("PROFESOR");
-      break;
-    
-    default:
-      echo("SUUUUUUUUUUUUUUU");
-      break;
+      $_SESSION['usuario'] = array(
+        "id" => md5(uniqid(rand())),
+        "type" => "profesor",
+        "username" => $_POST["nombreUsuario"]
+      );
+      var_dump($_SESSION);
+      session_write_close();
+      header("Location: ../enviarAvisos.php");
+      exit();
+      break; 
   }
 } else {
   log(BAD_REQUEST);
