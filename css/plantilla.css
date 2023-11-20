@@ -30,58 +30,55 @@ body{
 .navBar a.logo{
   margin:0;
   padding:0;
+  height: 50px;
+}
+
+.navBar a.logo img{
+  height: 50px;
 }
 
 .navBar a.logo:hover{
   filter: brightness(80%);
 }
-
-.navBar *{
+.container1{
+  display: table;
+}
+.container1 *{
   height: 50px;
 }
 
-.navBar .enlace{
+.container1 .enlace{
   float: left;
-  display: block;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  margin: 0;
   color: white;
   text-align: center;
   padding-right: 16px; 
-  padding-left: 14px;
-  padding-bottom: 0;
-  padding-top: 25px;
-  margin: 0;
-  align-self: center;
+  padding-left: 16px;
   text-decoration: none;
   font-size: 17px;
   font-family: var(--fuente);
+  justify-content: center;
+  align-content: center;
+  vertical-align: middle;
 }
 
-.navBar a:hover{
+.container1 .enlace h1{
+  font-size: 1em;
+}
+
+.container1 a:hover{
     background-color: var(--color-secundario-hover);
   }
 
-.navBar a.activo{
+.container1 a.activo{
   background-color: var(--fondo);
   color: black;
 }
 
-.navBar .busqueda{
-  margin-left: auto;
-  height: 40px;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  margin-right: 10px;
-  border-radius: 4px;
-  background-color: lightgrey;
-  display: flex;
-  align-items: center;
-  padding: 0;
-}
 
-.busqueda *{
-  height: 40px;
-  margin-right:0;
-}
 
 .busqueda input{
   padding-left: 0;
@@ -107,6 +104,28 @@ body{
   align-self: center;
 }
 
+.container2{
+  display: flex;
+  margin-left: auto;
+}
+.container2 *{
+  height: 50px;
+}
 
+.container2 .busqueda{
+  margin-left: auto;
+  height: 40px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-right: 10px;
+  border-radius: 4px;
+  background-color: lightgrey;
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
 
-
+.container2 .busqueda img{
+  height: 40px;
+  margin-right:0;
+}

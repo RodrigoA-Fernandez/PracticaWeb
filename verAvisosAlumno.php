@@ -1,14 +1,65 @@
 <?php include_once "inc/codigo_inicializacion.php"; ?>
-
+<?php
+  session_start();
+  if(!isset($_SESSION['usuario'])){
+    echo '
+    <script>
+      alert("Debe iniciar sesión para entrar a esta página.");
+      window.location = "index.php";
+    </script>
+    ';
+    exit();
+  }
+  if($_SESSION['usuario']['type'] !== "estudiante"){
+    echo '
+    <script>
+      alert("Esta página está limitada a estudiantes.");
+      window.location = "verAvisosAlumno.php";
+    </script>
+    ';
+    exit();
+  }
+?>
 <?php cabeceraPlantilla()?>
 
+
 <div class="mensajes">
-  <div class = "msg">
-    <div>Jose Ignacio Farrán</div>
-    <div>17/11/23 18:52</div>
-    <div>Asunto</div>
-    <div>Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. Nostrud officia pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.</div>
-  </div>
+<?php 
+$mensajes = getMensajesEstudiante($conexionBD, $_SESSION["usuario"]["username"], 0);
+
+for ($i=0; $i < count($mensajes) ; $i++) { 
+  $fecha = strtotime($mensajes[$i]["Fecha"]);
+  $strFecha = date("d/m/Y",$fecha);
+  if($mensajes[$i]["Leido"] == 0){
+    echo '<div class="msg noLeido" id ='.$mensajes[$i]["Id"].'>';
+  }else{
+    echo '<div class="msg" id ='.$mensajes[$i]["Id"].'>';
+  }
+  echo  '<div class="info">';
+  echo '<div class="autor">';
+  echo $mensajes[$i]["Nombre"];
+  echo '</div>';
+  echo '<div class = "fecha" >';
+  echo $strFecha;
+  echo '</div>';
+  echo '</div>';
+  if($mensajes[$i]["Leido"] == 0){
+    echo '<hr class=" solida"/>';
+  }else{
+    echo '<hr class="solida"/>';
+  }
+  echo '<div class="asunto">';
+  echo $mensajes[$i]["Asunto"];
+  echo '</div>';
+  echo '<hr class = "discontinua ocultable oculto">';
+  echo '<div class = "texto ocultable oculto">';
+  echo $mensajes[$i]["Contenido"];
+  echo '</div>';
+  echo '</div>';
+
+}
+
+?>
 </div>
 
 <script>
@@ -18,12 +69,15 @@
       elementos[i].classList.add("activo");
     } else{
       elementos[i].remove();
+      i--;
     }
   }
 </script>
-<script>
-  document.head.innerHTML += '<link rel="stylesheet" href="./css/mostrarMensajes.css">'
+
+<script src="js/clickMensaje.js">
+
 </script>
+ 
 <?php piePlantilla()?>
 
 <?php include_once "inc/codigo_finalizacion.php"; ?>

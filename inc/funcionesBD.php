@@ -1,13 +1,13 @@
 <?php
-function nuevoEstudiante($conexionBD, $nia, $nombre, $contrasenia, $login) {
+function nuevoEstudiante($conexionBD, $nombre, $contrasenia, $login) {
 	// Preparación consulta inserción nueva persona 
   $contraseniaHash= hash("md5",$contrasenia);
 	$sentenciaSQL= mysqli_stmt_init($conexionBD);
-	$okFlag= mysqli_stmt_prepare($sentenciaSQL, 'INSERT INTO USUARIO_ESTUDIANTE (Nia, Nombre, Contrasenia, Login) VALUES (?, ?, ?, ?)');
+	$okFlag= mysqli_stmt_prepare($sentenciaSQL, 'INSERT INTO USUARIO_ESTUDIANTE (Nombre, Contrasenia, Login) VALUES (?, ?, ?)');
 
 	if ($okFlag) {
 		// vincular los parámetros para los marcadores 
-		mysqli_stmt_bind_param($sentenciaSQL, "ssss", $nia, $nombre, $contraseniaHash, $login);
+		mysqli_stmt_bind_param($sentenciaSQL, "sss", $nombre, $contraseniaHash, $login);
 
 		// ejecutar la consulta 
 		$okFlag= mysqli_stmt_execute($sentenciaSQL);
@@ -86,15 +86,15 @@ function comprobarLogin($conexionBD, $login, $contraseniaHash) {
 ?>
 
 <?php
-function nuevoProfesor($conexionBD, $nia, $nombre, $contrasenia, $login) {
+function nuevoProfesor($conexionBD, $nombre, $contrasenia, $login) {
 	// Preparación consulta inserción nueva persona 
   $contraseniaHash= hash("md5",$contrasenia);
 	$sentenciaSQL= mysqli_stmt_init($conexionBD);
-	$okFlag= mysqli_stmt_prepare($sentenciaSQL, 'INSERT INTO USUARIO_PROFESOR (Nia, Nombre, Contrasenia, Login) VALUES (?, ?, ?, ?)');
+	$okFlag= mysqli_stmt_prepare($sentenciaSQL, 'INSERT INTO USUARIO_PROFESOR (Nombre, Contrasenia, Login) VALUES (?, ?, ?)');
 
 	if ($okFlag) {
 		// vincular los parámetros para los marcadores 
-		mysqli_stmt_bind_param($sentenciaSQL, "ssss", $nia, $nombre, $contraseniaHash, $login);
+		mysqli_stmt_bind_param($sentenciaSQL, "sss", $nombre, $contraseniaHash, $login);
 
 		// ejecutar la consulta 
 		$okFlag= mysqli_stmt_execute($sentenciaSQL);
@@ -110,4 +110,26 @@ function nuevoProfesor($conexionBD, $nia, $nombre, $contrasenia, $login) {
 		return ERROR_ALTA_PERSONA;
 	}
 }
+?>
+<?php
+function getMensajesEstudiante($conexionBD, $login, $pagina) {
+  $numMensajes = 10;
+  $sentencia = 'SELECT UP.Nombre, A.Fecha, A.Asunto, A.Contenido, A.Id, DA.Leido FROM DIRIGIR_AVISO AS DA INNER JOIN AVISO AS A ON DA.Aviso = A.Id INNER JOIN USUARIO_PROFESOR AS UP ON UP.Nia = A.Autor INNER JOIN USUARIO_ESTUDIANTE AS UE ON DA.Destinatario = UE.Nia WHERE UE.Login = ? ORDER BY A.Fecha LIMIT ?,?';
+	$sentenciaSQL= mysqli_stmt_init($conexionBD);
+  mysqli_stmt_prepare($sentenciaSQL, $sentencia);
+  $limite = $pagina * $numMensajes;
+  mysqli_stmt_bind_param($sentenciaSQL, "sii", $login, $limite, $numMensajes);
+	mysqli_stmt_execute($sentenciaSQL);
+  $resultado = mysqli_stmt_get_result($sentenciaSQL);
+
+	$array_filas=array();
+
+	while ($fila = mysqli_fetch_array($resultado, MYSQLI_ASSOC)) {
+		array_Push($array_filas,$fila);
+	}
+	
+	mysqli_free_result($resultado);
+	
+	return $array_filas;
+}	
 ?>
