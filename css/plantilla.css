@@ -1,7 +1,5 @@
 @import "constantes.css";
-:root{
-  --fondo: rgb(242, 243, 247);
-}
+
 
 html, body {
   margin: 0;

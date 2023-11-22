@@ -1,10 +1,10 @@
-<?php include_once "inc/codigo_inicializacion.php"; ?>
+<?php include_once "codigo_inicializacion.php"?>
 <?php
   session_start();
   if(!isset($_SESSION['usuario'])){
     echo '
     <script>
-      alert("Debe iniciar sesión para entrar a esta página.");
+      alert("Error: Sesión no iniciada.");
       window.location = "index.php";
     </script>
     ';
@@ -13,26 +13,15 @@
   if($_SESSION['usuario']['type'] !== "estudiante"){
     echo '
     <script>
-      alert("Esta página está limitada a estudiantes.");
+      alert("Error: Página está limitada a estudiantes.");
       window.location = "verAvisosAlumno.php";
     </script>
     ';
     exit();
   }
 ?>
-<?php cabeceraPlantilla()?>
-
-<div class="contenedorMensajes">
-<div class = "cambioPagina">
-    
-
-    
-</div>
-
-<div class="mensajes">
-
-<?php 
-$mensajes = getMensajesEstudiante($conexionBD, $_SESSION["usuario"]["username"],"", 0);
+<?php
+  $mensajes = getMensajesEstudiante($conexionBD, $_SESSION["usuario"]["username"],$_POST["filtro"], $_POST["pagina"]);
 
 for ($i=0; $i < count($mensajes) ; $i++) { 
   $fecha = strtotime($mensajes[$i]["Fecha"]);
@@ -42,7 +31,7 @@ for ($i=0; $i < count($mensajes) ; $i++) {
   }else{
     echo '<div class="msg" id ='.$mensajes[$i]["Id"].'>';
   }
-  echo '<div class="info">';
+  echo  '<div class="info">';
   echo '<div class="autor">';
   echo $mensajes[$i]["Nombre"];
   echo '</div>';
@@ -67,32 +56,4 @@ for ($i=0; $i < count($mensajes) ; $i++) {
 }
 
 ?>
-</div>
-</div>
-
-<button id="a">Prueba</button>
-
-<script src="https://code.jquery.com/jquery-3.7.1.min.js">
-</script>
-
-<script>
-  const elementos = document.getElementsByClassName("enlace");
-  for (var i = 0; i< elementos.length; i++){
-    if (elementos[i].id === "avisosEstudiante"){
-      elementos[i].classList.add("activo");
-    } else{
-      elementos[i].remove();
-      i--;
-    }
-  }
-</script>
-
-<script src="js/clickMensaje.js">
-</script>
-
-<script src="js/paginacion.js">
-</script>
- 
-<?php piePlantilla()?>
-
-<?php include_once "inc/codigo_finalizacion.php"; ?>
+<?php include_once "codigo_finalizacion.php"?>

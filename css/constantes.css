@@ -14,5 +14,6 @@
 :root{
   --color-secundario: #C61156;
   --color-secundario-hover: #B40044;
+  --fondo: rgb(242, 243, 247);
   --fuente: "Segoe UI Bold";
 }
