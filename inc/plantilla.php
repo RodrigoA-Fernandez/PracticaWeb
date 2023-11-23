@@ -16,37 +16,42 @@ const TITULO_PAGINA = "Gestor de Avisos UVa";
 </head>
   <body>
 	  <div class="navBar"> 
-      <a class="logo" href="www.uva.es">
+      <a class="logo" href="https://www.uva.es">
         <img src="../assets/logo.png" />
       </a>
-      <div class="container1">
-        <a href="../verAvisosProfesor.php" class="enlace" id="avisosProfesor">
-          <h1>Avisos</h1>
-        </a>
-        <a href="../verAvisosAlumno.php" class="enlace" id="avisosEstudiante">
-          <h1>
-            Avisos            
-          </h1>
-        </a>
-        <a href="../enviarAvisos.php" class = "enlace" id="enviarAvisos">
-          <h1>
-            Enviar Avisos
-          </h1>
-        </a>
-        <a href="../gestionarEstudiantes.php" class="enlace" id="gestorEstudiantes">
-          <h1>
-            Gestor Estudiantes
-          </h1>
-        </a>
-      </div>
-      <div class="container2">
-        <div class="busqueda">
-          <input>
-          <img src="../assets/lupa.png">
+      <div class="container">
+        <div class="container1">
+          <a href="../verAvisosProfesor.php" class="enlace" id="avisosProfesor">
+            <h1>Avisos</h1>
+          </a>
+          <a href="../verAvisosAlumno.php" class="enlace" id="avisosEstudiante">
+            <h1>
+              Avisos            
+            </h1>
+          </a>
+          <a href="../enviarAvisos.php" class = "enlace" id="enviarAvisos">
+            <h1>
+              Enviar Avisos
+            </h1>
+          </a>
+          <a href="../gestionarEstudiantes.php" class="enlace" id="gestorEstudiantes">
+            <h1>
+              Gestor Estudiantes
+            </h1>
+          </a>
         </div>
-        <a class="salida" href="../index.php">
-          <img class="salida" src="../assets/logout.png">
-        </a>
+        <div class="container2">
+          <a class="logo" href="https://www.uva.es">
+            <img src="../assets/logo.png" />
+          </a>
+          <div class="busqueda">
+            <input>
+            <img src="../assets/lupa.png">
+          </div>
+          <a class="salida" href="../index.php">
+            <img class="salida" src="../assets/logout.png">
+          </a>
+        </div>
       </div>
     </div>
 

@@ -1,4 +1,4 @@
-<?php include_once "codigo_inicializacion.php"?>
+<?php include_once "../codigo_inicializacion.php"?>
 <?php
   session_start();
   if(!isset($_SESSION['usuario'])){
@@ -56,4 +56,4 @@ for ($i=0; $i < count($mensajes) ; $i++) {
 }
 
 ?>
-<?php include_once "codigo_finalizacion.php"?>
+<?php include_once "../codigo_finalizacion.php"?>

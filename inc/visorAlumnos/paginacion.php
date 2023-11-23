@@ -1,4 +1,4 @@
-<?php include_once "codigo_inicializacion.php"?>
+<?php include_once "../codigo_inicializacion.php"?>
 <?php
   session_start();
   $numPaginas = getPaginasMensajes($conexionBD,$_SESSION["usuario"]["username"], $_POST["filtro"]);
@@ -26,4 +26,4 @@
   echo '<button id = "siguiente">></button>';
   echo '<button id = "ultimo">&raquo</button>';
 ?>
-<?php include_once "codigo_finalizacion.php"?>
+<?php include_once "../codigo_finalizacion.php"?>
