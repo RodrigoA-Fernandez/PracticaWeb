@@ -12,7 +12,7 @@
   border-color: black;
   border: solid;
   border-width: 2px;
-  width: 70%;
+  width: 100%;
   align-self: center;
   background-color: lightgray;
   user-select: none;
@@ -70,7 +70,7 @@
 }
 
 .contenedorMensajes{
-  width: 80%;
+  width: 60%;
   margin: 20px auto 20px auto;
   border:var(--color-secundario) solid;
   border-radius: 20px;
@@ -81,28 +81,32 @@
   width: 100%;
   background-color: var(--color-secundario);
   border-radius: 15px 15px 0 0;
-  height: 2em;
+  height: 2.5em;
   display: inline-block;
   text-align: center;
 }
 
 .cambioPagina *{
-    height: inherit;
-    background-color: var(--color-secundario);
-    border: none;
-    font-family: var(--fuente);
-    color: white;
-    width: 2em;
-  }
+  height: inherit;
+  background-color: var(--color-secundario);
+  border: none;
+  font-family: var(--fuente);
+  color: white;
+  width: 2em;
+}
 
 .cambioPagina button:hover{
-    background-color: var(--color-secundario-hover);
-  }
+  background-color: var(--color-secundario-hover);
+}
+
 .cambioPagina .activo{
-    background-color: beige;
-    color: black;
-  }
+  background-color: beige;
+  color: black;
+  border-radius: 5px 5px 0 0;
+}
 .cambioPagina .activo:hover{
-    background-color: beige;
-    color: black;
-  }
+  background-color: beige;
+  color: black;
+}
+
+

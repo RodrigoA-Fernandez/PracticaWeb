@@ -12,7 +12,7 @@ $(document).ready(function(){
 
 function cargarBotonera(){
   $(".cambioPagina").load(
-    "inc/paginacion.php",
+    "inc/visorAlumnos/paginacion.php",
     {
       filtro: $(".busqueda input").val(),
       pagActual: pagina,
@@ -26,7 +26,7 @@ function cargarBotonera(){
 
 function asignarBotones(){
   $.ajax({
-    url: "./inc/getNumPaginas.php",
+    url: "./inc/visorAlumnos/getNumPaginas.php",
     type: "POST",
     data: {filtro: $(".busqueda input").val()},
     success: function (data){
@@ -60,7 +60,7 @@ function cambiarPagina(pagCambio,modo){
   pagina = pagCambio;
   
   $.ajax({
-    url: "./inc/getNumPaginas.php",
+    url: "./inc/visorAlumnos/getNumPaginas.php",
     type: "POST",
     data: {filtro: $(".busqueda input").val()},
     success: function (data){ 
@@ -68,7 +68,7 @@ function cambiarPagina(pagCambio,modo){
         pagina = Number(data);
     }else{
       $(".mensajes").load(
-        "inc/cargarAvisos.php",
+        "inc/visorAlumnos/cargarAvisos.php",
         {
           filtro: $(".busqueda input").val(),
           pagina: pagina,

@@ -38,6 +38,14 @@ body{
 .navBar a.logo:hover{
   filter: brightness(80%);
 }
+
+.container{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 50px;
+}
+
 .container1{
   display: table;
 }
@@ -128,4 +136,37 @@ body{
 .container2 .busqueda img{
   height: 40px;
   margin-right:0;
+  margin-left: auto;
 }
+
+.container2 .logo{
+    display: none;
+  }
+
+@media (max-width: 550px){
+  .navBar {
+    height: 100px;
+  }
+  .navBar .logo {
+    display: none;
+  }
+
+  .busqueda{
+    padding-right: 0;
+  }
+
+  .container{
+    flex-direction: column-reverse;
+    width: 100%;
+    height: 100px;
+  }
+  .container2{
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .container2 .logo{
+    display: block;
+  }
+}
+
