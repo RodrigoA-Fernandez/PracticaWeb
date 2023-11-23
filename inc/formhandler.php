@@ -3,7 +3,6 @@
 <?php
 session_start();
 // var_dump($_SERVER["REQUEST_METHOD"]);
-
 if ( $_SERVER["REQUEST_METHOD"] == "POST") {
   if($_POST["nombreUsuario"] == NULL ||$_POST["contrasenia"] == NULL){
     header("Location: ../index.php?falloLogin=sinLogin");

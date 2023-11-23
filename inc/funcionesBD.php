@@ -8,10 +8,10 @@ function nuevoEstudiante($conexionBD, $nombre, $contrasenia, $login) {
 	if ($okFlag) {
 		// vincular los parámetros para los marcadores 
 		mysqli_stmt_bind_param($sentenciaSQL, "sss", $nombre, $contraseniaHash, $login);
-
 		// ejecutar la consulta 
-		$okFlag= mysqli_stmt_execute($sentenciaSQL);
-
+    
+    $okFlag= mysqli_stmt_execute($sentenciaSQL);
+  
 		// destruir la sentencia 
 		mysqli_stmt_close($sentenciaSQL);
 	}

@@ -109,4 +109,6 @@
   color: black;
 }
 
-
+.puntos{
+    display: inline;
+  }

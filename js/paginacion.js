@@ -51,6 +51,7 @@ function asignarBotones(){
   $("#anterior").click(function(){
     cambiarPagina(pagina,"m");
   });
+
 }
 function cambiarPagina(pagCambio,modo){
   if((pagCambio < 0 || pagCambio == pagina) && modo !== "r"){
@@ -64,6 +65,7 @@ function cambiarPagina(pagCambio,modo){
     type: "POST",
     data: {filtro: $(".busqueda input").val()},
     success: function (data){ 
+    console.log(pagina + " " + Number(data));
     if(pagina > Number(data)){
         pagina = Number(data);
     }else{
@@ -81,11 +83,11 @@ function cambiarPagina(pagCambio,modo){
             });
             $(".cambioPagina #"+(antPag+1)).removeClass("activo");
             $(".cambioPagina #"+(pagina+1)).addClass("activo");
-            inicializarMensajes();
             $("#siguiente").off();
             $("#siguiente").click(function(){
               cambiarPagina(pagina + 1);
             });
+            inicializarMensajes();
           });
         }
       );

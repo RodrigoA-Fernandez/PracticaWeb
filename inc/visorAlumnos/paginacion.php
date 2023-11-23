@@ -9,7 +9,7 @@
   if($inicio <= 0){
     $inicio = 0;   
   }else{
-    echo '<div>...</div>';
+    echo '<span>...</span>';
   }
   if($fin >= $numPaginas){
     $fin = $numPaginas;
@@ -21,7 +21,7 @@
     echo '<button id = "'.$i.'"class = "botonId" >'.$i."</button>"; 
   }
   if($band){
-    echo '<div>...<div>';
+    echo '<span>...</span>';
   }
   echo '<button id = "siguiente">></button>';
   echo '<button id = "ultimo">&raquo</button>';
