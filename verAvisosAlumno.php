@@ -70,7 +70,6 @@ for ($i=0; $i < count($mensajes) ; $i++) {
 </div>
 </div>
 
-<button id="a">Prueba</button>
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js">
 </script>
@@ -92,7 +91,7 @@ for ($i=0; $i < count($mensajes) ; $i++) {
 
 <script src="js/paginacion.js">
 </script>
- 
+<?php session_commit();?>
 <?php piePlantilla()?>
 
 <?php include_once "inc/codigo_finalizacion.php"; ?>

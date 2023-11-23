@@ -6,14 +6,22 @@
   echo '<button id = "anterior"><</button>';
   $inicio = $_POST["pagActual"] - 4;
   $fin = $_POST["pagActual"] + 4;
-  if($inicio < 0){
+  if($inicio <= 0){
     $inicio = 0;   
+  }else{
+    echo '<div>...</div>';
   }
-  if($fin > $numPaginas){
+  if($fin >= $numPaginas){
     $fin = $numPaginas;
+    $band = false;
+  }else{
+    $band = true;
   }
   for ($i=1; $i <= $fin; $i++) { 
-    echo "<button id = ".$i.">".$i."</button>"; 
+    echo '<button id = "'.$i.'"class = "botonId" >'.$i."</button>"; 
+  }
+  if($band){
+    echo '<div>...<div>';
   }
   echo '<button id = "siguiente">></button>';
   echo '<button id = "ultimo">&raquo</button>';

@@ -18,7 +18,7 @@ function cargarBotonera(){
       pagActual: pagina,
     },
     function(){
-      $(".cambioPagina #"+(pagina+1)).css("background-color","var(--fondo)");
+      $(".cambioPagina #"+(pagina+1)).addClass("activo");
       asignarBotones();
     }
   );
@@ -37,6 +37,11 @@ function asignarBotones(){
       )
     }
   });
+  $(".botonId").each(function(i){
+    $("#"+(i+1)).click(function(){
+      cambiarPagina(Number(i),"m");
+    })
+  });
   $("#primero").click(function(){
     cambiarPagina(0,"m");
   });
@@ -53,21 +58,14 @@ function cambiarPagina(pagCambio,modo){
   }
   antPag = pagina;
   pagina = pagCambio;
-
-  $(".cambioPagina #"+(antPag+1)).css("background-color","var(--color-secundario)");
-  $(".cambioPagina #"+(pagina+1)).css("background-color","var(--fondo)");
   
-  $("#anterior").off();
-  $("#anterior").click(function(){
-    cambiarPagina(pagina-1);
-  });
   $.ajax({
     url: "./inc/getNumPaginas.php",
     type: "POST",
     data: {filtro: $(".busqueda input").val()},
     success: function (data){ 
-    if(pagina > (data)){
-        pagina = data;
+    if(pagina > Number(data)){
+        pagina = Number(data);
     }else{
       $(".mensajes").load(
         "inc/cargarAvisos.php",
@@ -77,6 +75,12 @@ function cambiarPagina(pagCambio,modo){
         },
         function(){
           $(".msg").ready(function(){
+            $("#anterior").off();
+            $("#anterior").click(function(){
+              cambiarPagina(pagina-1);
+            });
+            $(".cambioPagina #"+(antPag+1)).removeClass("activo");
+            $(".cambioPagina #"+(pagina+1)).addClass("activo");
             inicializarMensajes();
             $("#siguiente").off();
             $("#siguiente").click(function(){
