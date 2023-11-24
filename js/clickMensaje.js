@@ -1,36 +1,36 @@
 function inicializarMensajes(){
-  const mensajes = document.getElementsByClassName("msg");
-  for (let i = 0; i < mensajes.length; i++) {
-    mensajes[i].addEventListener("click",function(){
-      if(mensajes[i].classList.contains("noLeido")){
-        mensajes[i].classList.remove("noLeido");
-      }
-      //Bucle para cerrar el resto de mensajes
-      for (let j = 0; j < mensajes.length; j++) {
-        const element = mensajes[j];
-        if (i !== j) {
-          let ocultos = element.getElementsByClassName("ocultable");
-          for (let k = 0; k < ocultos.length; k++) {
-            const element2 = ocultos[k];
-            if(!element2.classList.contains("oculto")){
-              element2.classList.add("oculto");
-            }
-          }
-        }
-        
-      }
-       
-      //Bucle para abrir/cerrar el clicado
-      var hijos = mensajes[i].getElementsByClassName("ocultable");
-      for (let j = 0; j < hijos.length; j++) {
-        if (hijos[j].classList.contains("oculto")){
-          hijos[j].classList.remove("oculto");
-        } else {
-          hijos[j].classList.add("oculto");
-        }
-        
+  $(".msg").click(function(){
+    var id = $(this).attr("id");
+    
+    $.ajax({
+      url: "./inc/visorAlumnos/marcarLeido.php",
+      method: "POST",
+      data: { mensaje: $(this).attr("id") }
+    }); 
+     //Expandir Mensaje
+    $(this).children(".ocultable").each(function(){
+      if($(this).hasClass("oculto")){
+        $(this).removeClass("oculto");
+      }else{
+        $(this).addClass("oculto");
       }
     });
-    
-  }
+
+    //Cerrar el resto de Mensajes
+    $(".msg").each(function(){
+      if($(this).attr("id") !== id){
+        $(this).children(".ocultable").each(function(){
+          if(!$(this).hasClass("oculto")){
+            $(this).addClass("oculto");
+          }
+        });
+      }
+    });
+
+    //Marcar Leido
+    if($(this).hasClass("noLeido")){
+      $(this).removeClass("noLeido");
+    }
+  });
+
 }

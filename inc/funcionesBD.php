@@ -158,3 +158,14 @@ function getPaginasMensajes($conexionBD, $login, $filtro){
   return intdiv($fila["COUNT(*)"],$numMensajes)+1;
 }
 ?>
+<?php
+function marcarLeido($conexionBD, $idMensaje, $login){
+  $sentencia = 'UPDATE `DIRIGIR_AVISO` SET `Leido`=1 WHERE Destinatario = (SELECT UE.Nia FROM USUARIO_ESTUDIANTE AS UE WHERE login = ?) AND Aviso = ?';
+
+  $senteciaSQL = mysqli_stmt_init($conexionBD);
+  mysqli_stmt_prepare($senteciaSQL, $sentencia);
+  mysqli_stmt_bind_param($senteciaSQL, "si", $login, $idMensaje);
+  mysqli_stmt_execute($senteciaSQL);
+
+}
+?>
