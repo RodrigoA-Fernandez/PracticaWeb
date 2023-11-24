@@ -4,10 +4,10 @@
   $numPaginas = getPaginasMensajes($conexionBD,$_SESSION["usuario"]["username"], $_POST["filtro"]);
   echo '<button id = "primero">&laquo</button>';
   echo '<button id = "anterior"><</button>';
-  $inicio = $_POST["pagActual"] - 4;
+  $inicio = $_POST["pagActual"] - 2;
   $fin = $_POST["pagActual"] + 4;
-  if($inicio <= 0){
-    $inicio = 0;   
+  if($inicio <= 1){
+    $inicio = 1;   
   }else{
     echo '<span>...</span>';
   }
@@ -17,7 +17,7 @@
   }else{
     $band = true;
   }
-  for ($i=1; $i <= $fin; $i++) { 
+  for ($i=$inicio; $i <= $fin; $i++) { 
     echo '<button id = "'.$i.'"class = "botonId" >'.$i."</button>"; 
   }
   if($band){

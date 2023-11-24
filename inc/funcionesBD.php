@@ -150,7 +150,11 @@ function getPaginasMensajes($conexionBD, $login, $filtro){
 		} else {
 			$fila= array();
 		}
+  mysqli_free_result($resultado);
+  mysqli_stmt_close($sentenciaSQL);
 
+  // return $login;
+  // return $fila["COUNT(*)"];
   return intdiv($fila["COUNT(*)"],$numMensajes)+1;
 }
 ?>

@@ -30,26 +30,32 @@ function asignarBotones(){
     type: "POST",
     data: {filtro: $(".busqueda input").val()},
     success: function (data){
+      $(".cambioPagina #ultimo").off();
       $(".cambioPagina #ultimo").click(
         function(){
-          cambiarPagina(Number(data,"m"));
+          cambiarPagina(Number(data-1,"m"));
         }
       )
     }
   });
-  $(".botonId").each(function(i){
-    $("#"+(i+1)).click(function(){
-      cambiarPagina(Number(i),"m");
-    })
+  $(".botonId").off();
+  $(".botonId").each(function(){
+    $(this).click(function(){
+      cambiarPagina(Number(this.getAttribute("id"))-1,"m");
+    });
+    
   });
+  $("#primero").off();
   $("#primero").click(function(){
     cambiarPagina(0,"m");
   });
+  $("#siguiente").off();
   $("#siguiente").click(function(){
     cambiarPagina(pagina + 1,"m");
   });
+  $("#anterior").off();
   $("#anterior").click(function(){
-    cambiarPagina(pagina,"m");
+    cambiarPagina(pagina-1,"m");
   });
 
 }
@@ -57,18 +63,18 @@ function cambiarPagina(pagCambio,modo){
   if((pagCambio < 0 || pagCambio == pagina) && modo !== "r"){
     return;
   }
-  antPag = pagina;
-  pagina = pagCambio;
   
   $.ajax({
     url: "./inc/visorAlumnos/getNumPaginas.php",
     type: "POST",
     data: {filtro: $(".busqueda input").val()},
     success: function (data){ 
-    console.log(pagina + " " + Number(data));
-    if(pagina > Number(data)){
-        pagina = Number(data);
+    
+    if(pagCambio >= Number(data)){
+        pagina = Number(data)-1;
     }else{
+      antPag = pagina;
+      pagina = pagCambio;
       $(".mensajes").load(
         "inc/visorAlumnos/cargarAvisos.php",
         {
@@ -77,17 +83,9 @@ function cambiarPagina(pagCambio,modo){
         },
         function(){
           $(".msg").ready(function(){
-            $("#anterior").off();
-            $("#anterior").click(function(){
-              cambiarPagina(pagina-1);
-            });
-            $(".cambioPagina #"+(antPag+1)).removeClass("activo");
-            $(".cambioPagina #"+(pagina+1)).addClass("activo");
-            $("#siguiente").off();
-            $("#siguiente").click(function(){
-              cambiarPagina(pagina + 1);
-            });
+            
             inicializarMensajes();
+            cargarBotonera();
           });
         }
       );
