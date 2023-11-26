@@ -1,172 +1,42 @@
 @import "constantes.css";
 
-
-html, body {
-  margin: 0;
-  margin-top: 0px;
-  padding: 0;
-  border: 0;
-  outline: 0;
-  font-size: 100%;
-  background: transparent;
-}
-
-body{
-  background-color: var(--fondo);
-}
-
-.navBar{
-  margin-top: 0;
-  overflow: hidden;
+.nav-bg{
   background-color: var(--color-secundario);
-  width: 100%;
-  height: 50px;
-  display: flex;
-  flex-direction: row;
 }
 
-.navBar a.logo{
-  margin:0;
-  padding:0;
-  height: 50px;
-}
-
-.navBar a.logo img{
-  height: 50px;
-}
-
-.navBar a.logo:hover{
-  filter: brightness(80%);
-}
-
-.container{
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  height: 50px;
-}
-
-.container1{
-  display: table;
-}
-.container1 *{
-  height: 50px;
-}
-
-.container1 .enlace{
-  float: left;
-  display: table-cell;
-  vertical-align: middle;
-  text-align: center;
-  margin: 0;
+.font {
+  font-style: var(--font) !important;
+  font-weight: bold;
   color: white;
-  text-align: center;
-  padding-right: 16px; 
-  padding-left: 16px;
-  text-decoration: none;
-  font-size: 17px;
-  font-family: var(--fuente);
-  justify-content: center;
-  align-content: center;
-  vertical-align: middle;
 }
 
-.container1 .enlace h1{
-  font-size: 1em;
-}
-
-.container1 a:hover{
-    background-color: var(--color-secundario-hover);
-  }
-
-.container1 a.activo{
-  background-color: var(--fondo);
-  color: black;
-}
-
-
-
-.busqueda input{
-  padding-left: 0;
-  margin-left: 10px;
-  text-shadow: non;
-  height: 30px;
-  border: none;
-  border-radius: 4px 0 0 4px;
-  background-color: lightgray;
-  outline: none;
-  font-family: var(--fuente);
-  width: 80%;
-}
-.salida{
-    padding-top: 0;
-    align-self: center;
-    margin-right: 5px;
-    display: flex;
-    padding-left: 5px;
-  }
-
-.salida img{
-  height: 30px;
-  align-self: center;
-}
-
-.container2{
-  display: flex;
-  margin-left: auto;
-}
-.container2 *{
+.logo img{
   height: 50px;
 }
 
-.container2 .busqueda{
-  margin-left: auto;
-  height: 40px;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  margin-right: 10px;
-  border-radius: 4px;
-  background-color: lightgrey;
-  display: flex;
-  align-items: center;
-  padding: 0;
-  width: 70%;
-}
-
-.container2 .busqueda img{
-  height: 40px;
-  margin-right:0;
-  margin-left: auto;
-}
-
-.container2 .logo{
-    display: none;
+@media only screen and (min-width: 991px) {
+  .navbar {
+    padding: 0 1rem;
   }
-
-@media (max-width: 550px){
-  .navBar {
-    height: 100px;
+  
+  .nav-pills .nav-link {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-radius: 0;
   }
-  .navBar .logo {
-    display: none;
-  }
-
-  .busqueda{
-    padding-right: 0;
-  }
-
-  .container{
-    flex-direction: column-reverse;
-    width: 100%;
-    height: 100px;
-  }
-  .container2{
-    margin-left: 0;
-    margin-right: 0;
-  }
-
-  .container2 .logo{
-    display: block;
+  .navbar-collapse{
+    height: 10vh;
   }
 }
 
+.nav-activo {
+  text-decoration: underline;
+  font-size: 1em;
+  background-color: white;
+  color: black;
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 2px;
+  border: solid;
+  border-color: black;
+}

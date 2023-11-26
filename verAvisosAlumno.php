@@ -71,19 +71,14 @@ for ($i=0; $i < count($mensajes) ; $i++) {
 </div>
 
 
-<script src="https://code.jquery.com/jquery-3.7.1.min.js">
-</script>
+
 
 <script>
-  const elementos = document.getElementsByClassName("enlace");
-  for (var i = 0; i< elementos.length; i++){
-    if (elementos[i].id === "avisosEstudiante"){
-      elementos[i].classList.add("activo");
-    } else{
-      elementos[i].remove();
-      i--;
-    }
-  }
+$(".profesor").each(function(){
+  $(this).remove();
+});
+$(".alumno").children("#verAvisos").addClass("nav-activo");
+  
 </script>
 
 <script src="js/clickMensaje.js">
