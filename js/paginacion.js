@@ -1,5 +1,13 @@
 var pagina = 0;
+var numPestanias;
 $(document).ready(function(){
+  if($(document).width() > 730){
+    numPestanias = 4;
+  } else if ($(document).width() > 300){
+    numPestanias = 2;
+  } else {
+    numPestanias = 1;
+  }
   inicializarMensajes();
   cargarBotonera(); 
   $(".busqueda input").on("change", function(){
@@ -7,15 +15,28 @@ $(document).ready(function(){
     asignarBotones();
     cambiarPagina(0,"r");
   });
+
+  $(window).bind("orientationchange", function(){
+    console.log($(window).width());
+    if($(window).width() > 730){
+      numPestanias = 4;
+    } else if ($(document).width() > 300){
+      numPestanias = 2;
+    } else {
+      numPestanias = 1;
+    }
+    cargarBotonera();
+  });
   
 });
 
 function cargarBotonera(){
-  $(".cambioPagina").load(
+  $(".cambioPagina ul").load(
     "inc/visorAlumnos/paginacion.php",
     {
       filtro: $(".busqueda input").val(),
       pagActual: pagina,
+      paginas: numPestanias,
     },
     function(){
       $(".cambioPagina #"+(pagina+1)).addClass("activo");
@@ -38,8 +59,8 @@ function asignarBotones(){
       )
     }
   });
-  $(".botonId").off();
-  $(".botonId").each(function(){
+  $(".numerico").off();
+  $(".numerico").each(function(){
     $(this).click(function(){
       cambiarPagina(Number(this.getAttribute("id"))-1,"m");
     });

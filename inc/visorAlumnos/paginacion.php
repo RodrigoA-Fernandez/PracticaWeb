@@ -1,15 +1,17 @@
 <?php include_once "../codigo_inicializacion.php"?>
 <?php
   session_start();
+  $paginasMostrar = $_POST["paginas"];
   $numPaginas = getPaginasMensajes($conexionBD,$_SESSION["usuario"]["username"], $_POST["filtro"]);
-  echo '<button id = "primero">&laquo</button>';
-  echo '<button id = "anterior"><</button>';
-  $inicio = $_POST["pagActual"] - 2;
-  $fin = $_POST["pagActual"] + 4;
+  echo '<li class = "page-item"><span id = "primero" class = "page-link">&laquo</span></li>';
+  echo '<li class = "page-item"><span id = "anterior" class = "page-link"><</span></li>';
+
+  $inicio = $_POST["pagActual"] - ($paginasMostrar - 2);
+  $fin = $_POST["pagActual"] + ($paginasMostrar);
   if($inicio <= 1){
     $inicio = 1;   
   }else{
-    echo '<span>...</span>';
+    echo '<li class = "page-item disabled"><span class = "page-link">...</span></li>';
   }
   if($fin >= $numPaginas){
     $fin = $numPaginas;
@@ -18,12 +20,12 @@
     $band = true;
   }
   for ($i=$inicio; $i <= $fin; $i++) { 
-    echo '<button id = "'.$i.'"class = "botonId" >'.$i."</button>"; 
+    echo '<li class = "page-item"><span id = "'.$i.'" class = "page-link numerico">'.$i.'</span></li>';
   }
   if($band){
-    echo '<span>...</span>';
+    echo '<li class = "page-item disabled"><span class = "page-link">...</span></li>';
   }
-  echo '<button id = "siguiente">></button>';
-  echo '<button id = "ultimo">&raquo</button>';
+  echo '<li class = "page-item"><span id = "siguiente" class = "page-link">></span></li>';
+  echo '<li class = "page-item"><span id = "ultimo" class = "page-link">&raquo</span></li>';
 ?>
 <?php include_once "../codigo_finalizacion.php"?>

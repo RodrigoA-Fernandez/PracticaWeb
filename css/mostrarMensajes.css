@@ -73,42 +73,67 @@
   width: 60%;
   margin: 20px auto 20px auto;
   border:var(--color-secundario) solid;
-  border-radius: 20px;
+  border-radius: 10px;
   background-color: beige;
+  min-width: 300px;
 }
 
 .cambioPagina{
   width: 100%;
   background-color: var(--color-secundario);
-  border-radius: 15px 15px 0 0;
+  border-radius: 5px 5px 0 0;
   height: 2.5em;
-  display: inline-block;
   text-align: center;
 }
 
-.cambioPagina *{
-  height: inherit;
-  background-color: var(--color-secundario);
-  border: none;
-  font-family: var(--fuente);
-  color: white;
-  width: 2em;
+
+.cambioPagina > .pagination > li > span{
+    background-color: var(--color-secundario);
+    color: white;
+    font-family: "Segoe UI Bold";
+    font-weight: bold;
+    font-size: 1em;
+    border: none;
+    border-radius: 5px 5px 5px 5px !important;
+  }
+
+.cambioPagina > .pagination > li > span:hover{
+    background-color: var(--color-secundario-hover);
+    color: white;
+    font-family: "Segoe UI Bold";
+    font-weight: bold;
+    border: none;
+  }
+
+.cambioPagina > .pagination > li > .activo{
+  background-color: beige ;
+  color: black ;
+}
+.cambioPagina > .pagination > li > .activo{
+  background-color: beige ;
+  color: black ;
 }
 
-.cambioPagina button:hover{
-  background-color: var(--color-secundario-hover);
-}
-
-.cambioPagina .activo{
-  background-color: beige;
-  color: black;
-  border-radius: 5px 5px 0 0;
-}
-.cambioPagina .activo:hover{
-  background-color: beige;
-  color: black;
-}
 
 .puntos{
     display: inline;
   }
+
+@media (max-width: 300px){
+  
+  .contenedorMensajes{
+      width: 100%;
+      margin-right: 0;
+      margin-left: 0;
+      min-width: 0px;
+    }
+
+  .mensajes{
+      width: 100%;
+      margin: 0;
+    }
+  .msg{
+      width: 100%;
+      margin: 0;
+    }
+}

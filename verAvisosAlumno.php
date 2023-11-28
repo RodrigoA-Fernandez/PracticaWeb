@@ -23,11 +23,11 @@
 <?php cabeceraPlantilla()?>
 
 <div class="contenedorMensajes">
-<div class = "cambioPagina">
-    
-
-    
-</div>
+  <nav class = "cambioPagina Page navigation dflex">
+    <ul class = "pagination justify-content-center">
+      
+    </ul>
+  </nav>
 
 <div class="mensajes">
 
