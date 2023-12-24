@@ -11,24 +11,65 @@
     ';
     exit();
   }
-  if($_SESSION['usuario']['type'] !== "estudiante"){
+  if($_SESSION['usuario']['type'] != "estudiante"){
     echo '
     <script>
-      alert("Esta página está limitada a estudiantes.");
+      alert("Esta página está limitada a profesores.");
       window.location = "verAvisosAlumno.php";
     </script>
     ';
     exit();
   }
+  if(comprobarLogin($conexionBD,$_SESSION["usuario"]["username"],hash("md5",$_SESSION["usuario"]["contrasenia"])) != LOGIN_ESTUDIANTE){
+     echo '
+    <script>
+      alert("Se ha producido un error, vuelva a iniciar sesión.");
+      window.location = "index.php";
+    </script>
+    ';
+    exit();
+  }
 ?>
+<div class = "formulario" >
+  <h1>Anterior Contraseña</h1>
+  <div class="contenedorInput">
+    <input id = "antigua" type = "password"></input>
+  </div>
+  <h1 style="margin-top: 20px;" >Nueva Contraseña</h1>
+  <div class="contenedorInput">
+    <input id = "nueva" type = "password"></input>
+  </div>
+  <h1 style="margin-top: 20px;" >Repita la Nueva Contraseña</h1>
+  <div class="contenedorInput">
+    <input id = "comprobarNueva" type = "password"></input>
+  </div>
+  <div>
+    <button id = "enviar" >Enviar</button>
+  </div>
+  <div class="mensajeError" style="display: none;">
+    <p>
+      
+    </p>
+  </div>
+  <div class="mensajeCambio" style="display: none;">
+          <p>
+            Contraseña cambiada.
+          </p>
+  </div>
+</div>
+
 
 
 <script>
+$('head').append('<link rel="stylesheet" type="text/css" href="./css/contrasenias.css">');
 $(".profesor").each(function(){
   $(this).remove();
 });
 $(".alumno").children("#contrasenia").addClass("nav-activo");
-  
 </script>
+
+<script src="./js/cambiarContrasenia.js">
+</script>
+
 <?php piePlantilla()?>
 <?php include_once "inc/codigo_finalizacion.php"; ?>

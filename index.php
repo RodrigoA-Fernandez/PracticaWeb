@@ -11,7 +11,7 @@
       <div>
         <div class = "guest-box">
           <div>
-            <form class = "login-form" action="inc/formhandler.php" method="post">
+            <form class = "login-form" action="inc/formhandlerLogin.php" method="post">
               <fieldset class = "login-form__fieldset">
                 <!---->
                 <!---->
@@ -70,7 +70,6 @@
         })
       }
     </script>
-
     <!-- Script que se encarga de mostrar el mensaje de error en caso de que el login no sea correcto -->
     <script>
       const error = document.getElementsByClassName("loginIncorrecto");

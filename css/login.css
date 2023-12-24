@@ -150,7 +150,6 @@ form {
   font-family: "SegoeUI";
   align-self: center;
   background-color: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(10px);
   border-radius: 10px;
   flex-direction: row;  
   align-items: center;

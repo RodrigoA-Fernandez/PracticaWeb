@@ -13,6 +13,8 @@
   define("LOGIN_VACIO", 5);
   define("LOGIN_ESTUDIANTE", 6);
   define("LOGIN_PROFESOR",7);
+  define("ERROR_CAMBIO_CONTRASENIA",8);
+  define("CAMBIO_CONTRASENIA",9);
 	
 	//conexión con base de datos
 	$host = "localhost";

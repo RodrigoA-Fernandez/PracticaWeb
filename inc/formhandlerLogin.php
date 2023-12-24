@@ -20,11 +20,12 @@ if ( $_SERVER["REQUEST_METHOD"] == "POST") {
       $_SESSION['usuario'] = array(
         "id" => md5(uniqid(rand())),
         "type" => "estudiante",
-        "username" => $_POST["nombreUsuario"]
+        "username" => $_POST["nombreUsuario"],
+        "contrasenia" => $_POST["contrasenia"]
       ); 
       var_dump($_SESSION);
       session_write_close();
-      header("Location: ../verAvisosAlumno.php");
+     header("Location: ../verAvisosAlumno.php");
       exit();
       break;
 
@@ -32,7 +33,8 @@ if ( $_SERVER["REQUEST_METHOD"] == "POST") {
       $_SESSION['usuario'] = array(
         "id" => md5(uniqid(rand())),
         "type" => "profesor",
-        "username" => $_POST["nombreUsuario"]
+        "username" => $_POST["nombreUsuario"],
+        "contrasenia" => $_POST["contrasenia"]
       );
       var_dump($_SESSION);
       session_write_close();
@@ -41,7 +43,9 @@ if ( $_SERVER["REQUEST_METHOD"] == "POST") {
       break; 
   }
 } else {
+  header("Location: ../index.php");
   log(BAD_REQUEST);
+  exit();
 }
 ?>  
 

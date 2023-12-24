@@ -19,6 +19,15 @@
     ';
     exit();
   }
+  if(comprobarLogin($conexionBD,$_SESSION["usuario"]["username"],hash("md5",$_SESSION["usuario"]["contrasenia"])) != LOGIN_PROFESOR){
+     echo '
+    <script>
+      alert("Se ha producido un error, vuelva a iniciar sesión.");
+      window.location = "index.php";
+    </script>
+    ';
+    exit();
+  }
 ?>
 <?php cabeceraPlantilla()?>
 

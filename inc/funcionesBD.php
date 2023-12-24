@@ -84,32 +84,7 @@ function comprobarLogin($conexionBD, $login, $contraseniaHash) {
 }
 ?>
 
-<?php
-function nuevoProfesor($conexionBD, $nombre, $contrasenia, $login) {
-	// Preparación consulta inserción nueva persona 
-  $contraseniaHash= hash("md5",$contrasenia);
-	$sentenciaSQL= mysqli_stmt_init($conexionBD);
-	$okFlag= mysqli_stmt_prepare($sentenciaSQL, 'INSERT INTO USUARIO_PROFESOR (Nombre, Contrasenia, Login) VALUES (?, ?, ?)');
 
-	if ($okFlag) {
-		// vincular los parámetros para los marcadores 
-		mysqli_stmt_bind_param($sentenciaSQL, "sss", $nombre, $contraseniaHash, $login);
-
-		// ejecutar la consulta 
-		$okFlag= mysqli_stmt_execute($sentenciaSQL);
-
-		// destruir la sentencia 
-		mysqli_stmt_close($sentenciaSQL);
-	}
-
-	if ($okFlag) {
-		return OK;
-    echo("OK");
-	} else {
-		return ERROR_ALTA_PERSONA;
-	}
-}
-?>
 <?php
 function getMensajesEstudiante($conexionBD, $login,$filtro ,$pagina) {
   $numMensajes = 10;
@@ -162,10 +137,22 @@ function getPaginasMensajes($conexionBD, $login, $filtro){
 function marcarLeido($conexionBD, $idMensaje, $login){
   $sentencia = 'UPDATE `DIRIGIR_AVISO` SET `Leido`=1 WHERE Destinatario = (SELECT UE.Nia FROM USUARIO_ESTUDIANTE AS UE WHERE login = ?) AND Aviso = ?';
 
-  $senteciaSQL = mysqli_stmt_init($conexionBD);
-  mysqli_stmt_prepare($senteciaSQL, $sentencia);
-  mysqli_stmt_bind_param($senteciaSQL, "si", $login, $idMensaje);
-  mysqli_stmt_execute($senteciaSQL);
+  $sentenciaSQL = mysqli_stmt_init($conexionBD);
+  mysqli_stmt_prepare($sentenciaSQL, $sentencia);
+  mysqli_stmt_bind_param($sentenciaSQL, "si", $login, $idMensaje);
+  mysqli_stmt_execute($sentenciaSQL);
+  mysqli_stmt_close($sentenciaSQL);
 
 }
 ?>
+<?php
+function cambiarContrasenia($conexionBD, $login,$nuevaContrasenia){
+  $sentencia = 'UPDATE `USUARIO_ESTUDIANTE` SET Contrasenia = ? WHERE Login = ?';
+  $sentenciaSQL = mysqli_stmt_init($conexionBD);
+  mysqli_stmt_prepare($sentenciaSQL, $sentencia);
+  mysqli_stmt_bind_param($sentenciaSQL, "ss", hash("md5", $nuevaContrasenia), $login);
+  mysqli_stmt_execute($sentenciaSQL);
+  mysqli_stmt_close($sentenciaSQL);
+}
+?>
+
