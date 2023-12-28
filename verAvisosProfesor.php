@@ -1,24 +1,5 @@
 <?php include_once "inc/codigo_inicializacion.php"; ?>
-<?php
-  if(!isset($_SESSION['usuario'])){
-    echo '
-    <script>
-      alert("Debe iniciar sesión para entrar a esta página.");
-      window.location = "index.php";
-    </script>
-    ';
-    exit();
-  }
-  if($_SESSION['usuario']['type'] !== "profesor"){
-    echo '
-    <script>
-      alert("Esta página está limitada a profesores.");
-      window.location = "verAvisosAlumno.php";
-    </script>
-    ';
-    exit();
-  }
-?>
+<?php comprobarProfesor($conexionBD)?>
 
 <?php cabeceraPlantilla()?>
 

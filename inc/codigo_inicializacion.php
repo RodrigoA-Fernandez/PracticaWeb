@@ -32,7 +32,7 @@
 	// ya se puede incluir el código de la plantilla y otros ...
   include "plantilla.php";
   include "funcionesBD.php";
-
+  include "comprobarTipoUsuario.php";
 ?>
 
 
