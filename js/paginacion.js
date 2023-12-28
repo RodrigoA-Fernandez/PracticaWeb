@@ -16,9 +16,9 @@ $(document).ready(function(){
     cambiarPagina(0,"r");
   });
 
-  $(window).bind("orientationchange", function(){
-    console.log($(window).width());
-    if($(window).width() > 730){
+  $(window).on("resize", function(){
+    console.log($(document).width());
+    if($(document).width() > 730){
       numPestanias = 4;
     } else if ($(document).width() > 300){
       numPestanias = 2;

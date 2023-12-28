@@ -1,6 +1,5 @@
 <?php include_once "../codigo_inicializacion.php"?>
 <?php
-  session_start();
   if(!isset($_SESSION['usuario'])){
     echo '
     <script>

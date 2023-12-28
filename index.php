@@ -11,7 +11,7 @@
       <div>
         <div class = "login-guest-box">
           <div>
-            <form class = "login-form" action="inc/formhandlerLogin.php" method="post">
+            <form class = "login-form" action="inc/formhandlerLogin.php" onsubmit="validarInput();" name = "login" method="post">
               <fieldset class = "login-form__fieldset">
                 <!---->
                 <!---->
@@ -60,7 +60,7 @@
     <script>
       const elements = document.getElementsByClassName('login-logo');
 
-      for (let i = 0; i<=elements.length;i++){
+      for (let i = 0; i<elements.length;i++){
         elements[i].addEventListener('animationend',function(e){
           elements[i].classList.remove("login-animado");
         });
@@ -88,6 +88,16 @@
       }
 
 
+    </script>
+    <script>
+    function validarInput(){
+      let email = document.forms["login"]["nombreUsuario"].value;
+      if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)){
+        return (true);
+      }
+      alert("El nombre de usuario debe ser un email.");
+      return (false)
+    }
     </script>
   </body>
   

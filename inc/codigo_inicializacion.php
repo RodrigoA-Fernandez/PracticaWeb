@@ -28,9 +28,11 @@
 	// Seleccionar la base de datos adecuada
 	mysqli_select_db($conexionBD, "NotificadorAvisos");
 	
+  session_start();
 	// ya se puede incluir el código de la plantilla y otros ...
   include "plantilla.php";
   include "funcionesBD.php";
+
 ?>
 
 

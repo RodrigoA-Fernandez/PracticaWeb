@@ -1,8 +1,7 @@
 <?php include_once "../codigo_inicializacion.php"?>
 <?php
-  session_start();
   $paginasMostrar = $_POST["paginas"];
-  $numPaginas = getPaginasMensajes($conexionBD,$_SESSION["usuario"]["username"], $_POST["filtro"]);
+  $numPaginas = getPaginasMensajes($conexionBD,$_SESSION["usuario"]["username"], "");
   echo '<li class = "page-item"><span id = "primero" class = "page-link">&laquo</span></li>';
   echo '<li class = "page-item"><span id = "anterior" class = "page-link"><</span></li>';
 

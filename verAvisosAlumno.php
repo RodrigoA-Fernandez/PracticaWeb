@@ -1,6 +1,5 @@
 <?php include_once "inc/codigo_inicializacion.php"; ?>
 <?php
-  session_start();
   if(!isset($_SESSION['usuario'])){
     echo '
     <script>
@@ -20,8 +19,8 @@
     exit();
   }
 ?>
-<?php cabeceraPlantilla()?>
 
+<?php cabeceraPlantilla()?>
 <div class="mensajes-contenedorMensajes">
   <nav class = "mensajes-cambioPagina Page navigation dflex">
     <ul class = "pagination justify-content-center">

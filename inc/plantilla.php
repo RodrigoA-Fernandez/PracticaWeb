@@ -27,27 +27,55 @@ const TITULO_PAGINA = "Gestor de Avisos UVa";
       </button>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item profesor">
-          <a class="nav-link font" id="enviarAvisos" href="../enviarAvisos.php">Enviar Avisos</a>
-        </li>
-        <li class="nav-item active profesor">
-          <a class="nav-link font" id="verAvisos" href="../verAvisosProfesor.php">Avisos</a>
-        </li>
-        <li class="nav-item active alumno">
-          <a class="nav-link font" id="verAvisos" href="../verAvisosAlumno.php">Avisos</a>
-        </li>
-        <li class="nav-item alumno">
-          <a class="nav-link font" id = "contrasenia" href="../contrasenia.php">Reestablecer Contraseña</a>
-        </li>
-        
-        <li class="nav-item profesor">
-          <a class="nav-link font" id = "gestorUsuarios" href="../gestionarEstudiantes.php">Gestor Usuarios</a>
-        </li>
+        <ul class="navbar-nav mr-auto">
+          
+<?php
+          if ($_SESSION["usuario"]["type"] == "profesor") {
+          echo'  
+            <li class="nav-item profesor"> 
+            <a class="nav-link font ';
+          if($_SERVER["REQUEST_URI"] == "/enviarAvisos.php"){
+            echo "nav-activo";
+          }
+          echo'" id="enviarAvisos" href="../enviarAvisos.php">Enviar Avisos</a>
+            </li>
+            <li class="nav-item active profesor">
+          <a class="nav-link font '; 
+          if($_SERVER["REQUEST_URI"] == "/verAvisosProfesor.php"){
+            echo "nav-activo";
+          }
+          echo'" id="verAvisos" href="../verAvisosProfesor.php">Avisos</a>
+            </li>
+            <li class="nav-item profesor">
+            <a class="nav-link font ';
+          if($_SERVER["REQUEST_URI"] == "/gestionarEstudiantes.php"){
+            echo "nav-activo";
+          }
+          echo'" id = "gestorUsuarios" href="../gestionarEstudiantes.php">Gestor Usuarios</a>
+          </li>
+          ';
+          }else if ($_SESSION["usuario"]["type"] == "estudiante"){
+            echo '
+              <li class="nav-item active alumno">
+          <a class="nav-link font '; 
+          if($_SERVER["REQUEST_URI"] == "/verAvisosAlumno.php"){
+            echo "nav-activo";
+          }
+          echo'"id="verAvisos" href="../verAvisosAlumno.php">Avisos</a>
+              </li>
+              <li class="nav-item alumno">
+          <a class="nav-link font ';
+          if($_SERVER["REQUEST_URI"] == "/contrasenia.php"){
+            echo "nav-activo";
+          }
+          echo'" id = "contrasenia" href="../contrasenia.php">Reestablecer Contraseña</a>
+              </li>
+          ';
+          }
+          ?>
 
-      </ul>
+        </ul>
       
-    </div>
       </div>
     </nav>
 
