@@ -30,17 +30,17 @@
     exit();
   }
 ?>
-<div class = "formulario" >
+<div class = "contrasenias-formulario" >
   <h1>Anterior Contraseña</h1>
-  <div class="contenedorInput">
+  <div class="contrasenias-contenedorInput">
     <input id = "antigua" type = "password"></input>
   </div>
   <h1 style="margin-top: 20px;" >Nueva Contraseña</h1>
-  <div class="contenedorInput">
+  <div class="contrasenias-contenedorInput">
     <input id = "nueva" type = "password"></input>
   </div>
   <h1 style="margin-top: 20px;" >Repita la Nueva Contraseña</h1>
-  <div class="contenedorInput">
+  <div class="contrasenias-contenedorInput">
     <input id = "comprobarNueva" type = "password"></input>
   </div>
   <div>
@@ -60,13 +60,7 @@
 
 
 
-<script>
-$('head').append('<link rel="stylesheet" type="text/css" href="./css/contrasenias.css">');
-$(".profesor").each(function(){
-  $(this).remove();
-});
-$(".alumno").children("#contrasenia").addClass("nav-activo");
-</script>
+
 
 <script src="./js/cambiarContrasenia.js">
 </script>

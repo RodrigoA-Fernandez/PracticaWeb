@@ -22,14 +22,14 @@
 ?>
 <?php cabeceraPlantilla()?>
 
-<div class="contenedorMensajes">
-  <nav class = "cambioPagina Page navigation dflex">
+<div class="mensajes-contenedorMensajes">
+  <nav class = "mensajes-cambioPagina Page navigation dflex">
     <ul class = "pagination justify-content-center">
       
     </ul>
   </nav>
 
-<div class="mensajes">
+<div class="mensajes-mensajes">
 
 <?php 
 $mensajes = getMensajesEstudiante($conexionBD, $_SESSION["usuario"]["username"],"", 0);
@@ -38,28 +38,28 @@ for ($i=0; $i < count($mensajes) ; $i++) {
   $fecha = strtotime($mensajes[$i]["Fecha"]);
   $strFecha = date("d/m/Y",$fecha);
   if($mensajes[$i]["Leido"] == 0){
-    echo '<div class="msg noLeido" id ='.$mensajes[$i]["Id"].'>';
+    echo '<div class="mensajes-msg mensajes-noLeido" id ='.$mensajes[$i]["Id"].'>';
   }else{
-    echo '<div class="msg" id ='.$mensajes[$i]["Id"].'>';
+    echo '<div class="mensajes-msg" id ='.$mensajes[$i]["Id"].'>';
   }
-  echo '<div class="info">';
-  echo '<div class="autor">';
+  echo '<div class="mensajes-info">';
+  echo '<div class="mensajes-autor">';
   echo $mensajes[$i]["Nombre"];
   echo '</div>';
-  echo '<div class = "fecha" >';
+  echo '<div class = "mensajes-fecha" >';
   echo $strFecha;
   echo '</div>';
   echo '</div>';
   if($mensajes[$i]["Leido"] == 0){
-    echo '<hr class=" solida"/>';
+    echo '<hr class=" mensajes-solida"/>';
   }else{
-    echo '<hr class="solida"/>';
+    echo '<hr class="mensajes-solida"/>';
   }
-  echo '<div class="asunto">';
+  echo '<div class="mensajes-asunto">';
   echo $mensajes[$i]["Asunto"];
   echo '</div>';
-  echo '<hr class = "discontinua ocultable oculto">';
-  echo '<div class = "texto ocultable oculto">';
+  echo '<hr class = "mensajes-discontinua mensajes-ocultable mensajes-oculto">';
+  echo '<div class = "mensajes-texto mensajes-ocultable mensajes-oculto">';
   echo $mensajes[$i]["Contenido"];
   echo '</div>';
   echo '</div>';
@@ -69,17 +69,6 @@ for ($i=0; $i < count($mensajes) ; $i++) {
 ?>
 </div>
 </div>
-
-
-
-
-<script>
-$(".profesor").each(function(){
-  $(this).remove();
-});
-$(".alumno").children("#verAvisos").addClass("nav-activo");
-  
-</script>
 
 <script src="js/clickMensaje.js">
 </script>

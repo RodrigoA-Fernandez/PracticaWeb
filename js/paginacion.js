@@ -10,7 +10,7 @@ $(document).ready(function(){
   }
   inicializarMensajes();
   cargarBotonera(); 
-  $(".busqueda input").on("change", function(){
+  $(".mensajes-busqueda input").on("change", function(){
     cargarBotonera();
     asignarBotones();
     cambiarPagina(0,"r");
@@ -31,15 +31,13 @@ $(document).ready(function(){
 });
 
 function cargarBotonera(){
-  $(".cambioPagina ul").load(
+  $(".mensajes-cambioPagina ul").load(
     "inc/visorAlumnos/paginacion.php",
     {
-      filtro: $(".busqueda input").val(),
       pagActual: pagina,
       paginas: numPestanias,
     },
     function(){
-      $(".cambioPagina #"+(pagina+1)).addClass("activo");
       asignarBotones();
     }
   );
@@ -51,8 +49,8 @@ function asignarBotones(){
     type: "POST",
     data: {filtro: $(".busqueda input").val()},
     success: function (data){
-      $(".cambioPagina #ultimo").off();
-      $(".cambioPagina #ultimo").click(
+      $("#ultimo").off();
+      $("#ultimo").click(
         function(){
           cambiarPagina(Number(data-1,"m"));
         }
@@ -96,21 +94,27 @@ function cambiarPagina(pagCambio,modo){
     }else{
       antPag = pagina;
       pagina = pagCambio;
-      $(".mensajes").load(
+      $(".mensajes-mensajes").load(
         "inc/visorAlumnos/cargarAvisos.php",
         {
           filtro: $(".busqueda input").val(),
           pagina: pagina,
         },
         function(){
-          $(".msg").ready(function(){
+          $(".mensajes-msg").ready(function(){
             
             inicializarMensajes();
             cargarBotonera();
           });
         }
       );
+      $(".mensajes-msg").each(function(){
+        $(this).children(".mensajes-ocultable").each(function(){
+            $(this).addClass("mensajes-oculto");
+        });
+    });
     }
+    
   }
   });
 }

@@ -1,5 +1,5 @@
 function inicializarMensajes(){
-  $(".msg").click(function(){
+  $(".mensajes-msg").click(function(){
     var id = $(this).attr("id");
     
     $.ajax({
@@ -8,28 +8,28 @@ function inicializarMensajes(){
       data: { mensaje: $(this).attr("id") }
     }); 
      //Expandir Mensaje
-    $(this).children(".ocultable").each(function(){
-      if($(this).hasClass("oculto")){
-        $(this).removeClass("oculto");
+    $(this).children(".mensajes-ocultable").each(function(){
+      if($(this).hasClass("mensajes-oculto")){
+        $(this).removeClass("mensajes-oculto");
       }else{
-        $(this).addClass("oculto");
+        $(this).addClass("mensajes-oculto");
       }
     });
 
     //Cerrar el resto de Mensajes
-    $(".msg").each(function(){
+    $(".mensajes-msg").each(function(){
       if($(this).attr("id") !== id){
-        $(this).children(".ocultable").each(function(){
-          if(!$(this).hasClass("oculto")){
-            $(this).addClass("oculto");
+        $(this).children(".mensajes-ocultable").each(function(){
+          if(!$(this).hasClass("mensajes-oculto")){
+            $(this).addClass("mensajes-oculto");
           }
         });
       }
     });
 
     //Marcar Leido
-    if($(this).hasClass("noLeido")){
-      $(this).removeClass("noLeido");
+    if($(this).hasClass("mensajes-noLeido")){
+      $(this).removeClass("mensajes-noLeido");
     }
   });
 

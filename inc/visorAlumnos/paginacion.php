@@ -20,7 +20,11 @@
     $band = true;
   }
   for ($i=$inicio; $i <= $fin; $i++) { 
-    echo '<li class = "page-item"><span id = "'.$i.'" class = "page-link numerico">'.$i.'</span></li>';
+    if($_POST["pagActual"] == $i -1){
+      echo '<li class = "page-item"><span id = "'.$i.'" class = "page-link numerico activo">'.$i.'</span></li>';
+    }else{
+      echo '<li class = "page-item"><span id = "'.$i.'" class = "page-link numerico">'.$i.'</span></li>';
+    }
   }
   if($band){
     echo '<li class = "page-item disabled"><span class = "page-link">...</span></li>';

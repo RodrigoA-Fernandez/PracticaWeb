@@ -24,16 +24,6 @@
 <?php cabeceraPlantilla()?>
 
 
-<script>
-  const elementos = document.getElementsByClassName("enlace");
-  for (var i = 0; i< elementos.length; i++){
-    if (elementos[i].id === "avisosProfesor"){
-      elementos[i].classList.add("activo");
-    }else if(elementos[i].id === "avisosEstudiante"){
-      elementos[i].remove();
-    }
-  }
-</script>
 <?php session_write_close()?>
 <?php piePlantilla()?>
 <?php include_once "inc/codigo_finalizacion.php"; ?>
