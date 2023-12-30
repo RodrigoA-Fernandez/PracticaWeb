@@ -11,7 +11,7 @@
       <div>
         <div class = "login-guest-box">
           <div>
-            <form class = "login-form" action="inc/formhandlerLogin.php" onsubmit="validarInput();" name = "login" method="post">
+            <form class = "login-form" action="inc/formhandlerLogin.php" onsubmit="return validarInput();" name = "login" method="post">
               <fieldset class = "login-form__fieldset">
                 <!---->
                 <!---->
@@ -92,7 +92,9 @@
     <script>
     function validarInput(){
       let email = document.forms["login"]["nombreUsuario"].value;
-      if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)){
+      var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+
+      if (regex.test(email)){
         return (true);
       }
       alert("El nombre de usuario debe ser un email.");

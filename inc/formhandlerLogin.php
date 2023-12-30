@@ -4,11 +4,13 @@
 session_start();
 // var_dump($_SERVER["REQUEST_METHOD"]);
 if ( $_SERVER["REQUEST_METHOD"] == "POST") {
-  if($_POST["nombreUsuario"] == NULL ||$_POST["contrasenia"] == NULL){
+  $nombreUsuario = htmlspecialchars($_POST["nombreUsuario"]);
+  $contrasenia = htmlspecialchars($_POST["contrasenia"]);
+  if($nombreUsuario == NULL ||$contrasenia == NULL){
     header("Location: ../index.php?falloLogin=sinLogin");
     exit();
   }
-  $login= (comprobarLogin($conexionBD,$_POST["nombreUsuario"], hash("md5",$_POST["contrasenia"]))); 
+  $login= (comprobarLogin($conexionBD,$nombreUsuario, hash("md5",$contrasenia))); 
   switch ($login) {
     case LOGIN_INCORRECTO:
       header("Location: ../index.php?falloLogin=loginIncorrecto");
@@ -20,8 +22,8 @@ if ( $_SERVER["REQUEST_METHOD"] == "POST") {
       $_SESSION['usuario'] = array(
         "id" => md5(uniqid(rand())),
         "type" => "estudiante",
-        "username" => $_POST["nombreUsuario"],
-        "contrasenia" => $_POST["contrasenia"]
+        "username" => $nombreUsuario,
+        "contrasenia" => $contrasenia
       ); 
       var_dump($_SESSION);
       session_write_close();
@@ -33,8 +35,8 @@ if ( $_SERVER["REQUEST_METHOD"] == "POST") {
       $_SESSION['usuario'] = array(
         "id" => md5(uniqid(rand())),
         "type" => "profesor",
-        "username" => $_POST["nombreUsuario"],
-        "contrasenia" => $_POST["contrasenia"]
+        "username" => $nombreUsuario,
+        "contrasenia" => $contrasenia
       );
       var_dump($_SESSION);
       session_write_close();
