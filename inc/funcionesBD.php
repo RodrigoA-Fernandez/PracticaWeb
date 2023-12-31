@@ -155,4 +155,23 @@ function cambiarContrasenia($conexionBD, $login,$nuevaContrasenia){
   mysqli_stmt_close($sentenciaSQL);
 }
 ?>
-
+<?php
+function getAlumnos($conexionBD){
+  $sentencia = 'SELECT `Nombre` from `USUARIO_ESTUDIANTE`';
+  $sentenciaSQL = mysqli_stmt_init($conexionBD);
+  mysqli_stmt_prepare($sentenciaSQL,$sentencia);
+  mysqli_stmt_execute($sentenciaSQL);
+  $resultado = mysqli_stmt_get_result($sentenciaSQL);
+  while($fila = $resultado->fetch_row()){
+    $filas[] = $fila; 
+  }
+  $resultado->close();
+  $sentenciaSQL->close();
+  return $filas;
+}
+?>
+<?php
+function hacerAviso($conexionBD, $destinatario, $asunto, $aviso, $autor){
+  $sentenciaAviso = "INSERT INTO `AVISO`(`Asunto`, `Contenido`, `Autor`) VALUES (?,?,?)";
+}
+?>

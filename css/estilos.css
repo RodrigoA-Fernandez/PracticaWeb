@@ -486,3 +486,39 @@ img.login-animado{
       margin: 0;
     }
 }
+
+
+.enviar-contenedor{
+  width: 60%;
+  border:var(--color-secundario) solid;
+  border-radius: 10px;
+  background-color: beige;
+  max-width: 700px;
+  padding: 0;
+}
+
+.enviar-contenedor > fieldset > input, .enviar-contenedor > fieldset > textarea{
+  outline: none;
+  border: none;
+  background: none;
+}
+
+
+.enviar-contenedor > fieldset > input:focus, .enviar-contenedor > fieldset > textarea:focus{
+  outline: none !important;
+  background: none;
+}
+
+.boton{
+  display: block;
+  border-radius: 10px;
+  border: none;
+  font-family: var(--fuente);
+  background-color: var(--color-secundario);
+  color: white;
+  padding: 5px;
+}
+
+.boton:hover{
+  background-color: var(--color-secundario-hover);
+}
