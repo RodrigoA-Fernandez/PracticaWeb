@@ -89,7 +89,7 @@ function comprobarLogin($conexionBD, $login, $contraseniaHash) {
 function getMensajesEstudiante($conexionBD, $login,$filtro ,$pagina) {
   $numMensajes = 10;
   $patron ="%".$filtro."%";
-  $sentencia = 'SELECT UP.Nombre, A.Fecha, A.Asunto, A.Contenido, A.Id, DA.Leido FROM DIRIGIR_AVISO AS DA INNER JOIN AVISO AS A ON DA.Aviso = A.Id INNER JOIN USUARIO_PROFESOR AS UP ON UP.Nia = A.Autor INNER JOIN USUARIO_ESTUDIANTE AS UE ON DA.Destinatario = UE.Nia WHERE( UE.Login = ? AND (A.Asunto LIKE ? OR A.Contenido LIKE ?))  ORDER BY A.Fecha LIMIT ?,?;';
+  $sentencia = 'SELECT UP.Nombre, A.Fecha, A.Asunto, A.Contenido, A.Id, DA.Leido FROM DIRIGIR_AVISO AS DA INNER JOIN AVISO AS A ON DA.Aviso = A.Id INNER JOIN USUARIO_PROFESOR AS UP ON UP.Nia = A.Autor INNER JOIN USUARIO_ESTUDIANTE AS UE ON DA.Destinatario = UE.Nia WHERE( (UE.Login = ?) AND (A.Asunto LIKE ? OR A.Contenido LIKE ?))  ORDER BY A.Fecha LIMIT ?,?;';
 	$sentenciaSQL= mysqli_stmt_init($conexionBD);
   mysqli_stmt_prepare($sentenciaSQL, $sentencia);
   $limite = $pagina * $numMensajes;
@@ -113,7 +113,7 @@ function getMensajesEstudiante($conexionBD, $login,$filtro ,$pagina) {
 function getPaginasMensajes($conexionBD, $login, $filtro){
   $numMensajes = 10;
   $patron = "%".$filtro."%";
-  $sentencia = 'SELECT COUNT(*) FROM DIRIGIR_AVISO AS DA INNER JOIN AVISO AS A ON DA.Aviso = A.Id INNER JOIN USUARIO_PROFESOR AS UP ON UP.Nia = A.Autor INNER JOIN USUARIO_ESTUDIANTE AS UE ON DA.Destinatario = UE.Nia WHERE( UE.Login = ? AND (A.Asunto LIKE ? OR A.Contenido LIKE ?))';
+  $sentencia = 'SELECT COUNT(*) FROM DIRIGIR_AVISO AS DA INNER JOIN AVISO AS A ON DA.Aviso = A.Id INNER JOIN USUARIO_PROFESOR AS UP ON UP.Nia = A.Autor INNER JOIN USUARIO_ESTUDIANTE AS UE ON DA.Destinatario = UE.Nia WHERE( (UE.Login = ? OR UE.Nia = 0) AND (A.Asunto LIKE ? OR A.Contenido LIKE ?))';
   $sentenciaSQL = mysqli_stmt_init($conexionBD);
   mysqli_stmt_prepare($sentenciaSQL, $sentencia);
   mysqli_stmt_bind_param($sentenciaSQL, "sss", $login,$patron,$patron);
@@ -159,19 +159,172 @@ function cambiarContrasenia($conexionBD, $login,$nuevaContrasenia){
 function getAlumnos($conexionBD){
   $sentencia = 'SELECT `Nombre` from `USUARIO_ESTUDIANTE`';
   $sentenciaSQL = mysqli_stmt_init($conexionBD);
-  mysqli_stmt_prepare($sentenciaSQL,$sentencia);
-  mysqli_stmt_execute($sentenciaSQL);
-  $resultado = mysqli_stmt_get_result($sentenciaSQL);
-  while($fila = $resultado->fetch_row()){
-    $filas[] = $fila; 
+  $okflag = mysqli_stmt_prepare($sentenciaSQL,$sentencia);
+  if ($okflag){
+    mysqli_stmt_execute($sentenciaSQL);
+    $resultado = mysqli_stmt_get_result($sentenciaSQL);
+    while($fila = $resultado->fetch_row()){
+      $filas[] = $fila; 
+    }
+    $resultado->close();
+    $sentenciaSQL->close();
+    return $filas;
   }
-  $resultado->close();
-  $sentenciaSQL->close();
-  return $filas;
+  return [];
 }
 ?>
 <?php
 function hacerAviso($conexionBD, $destinatario, $asunto, $aviso, $autor){
-  $sentenciaAviso = "INSERT INTO `AVISO`(`Asunto`, `Contenido`, `Autor`) VALUES (?,?,?)";
+  if (!comprobarLoginAlumno($conexionBD, $destinatario) ||!comprobarLoginProfesor($conexionBD, $autor) ){
+    error_log("Error: Alumno o Profesor Inexistente");
+    return false;
+  }
+  $sentenciaAviso = "INSERT INTO `AVISO`(`Asunto`, `Contenido`, `Autor`) VALUES (?,?,(SELECT Nia FROM USUARIO_PROFESOR WHERE login = ?))";
+  $avisoSQL = mysqli_stmt_init($conexionBD);
+  $okflag = $avisoSQL ->prepare($sentenciaAviso);
+  if ($okflag){
+    $avisoSQL -> bind_param("sss", $asunto, $aviso, $autor);
+    $avisoSQL -> execute();
+    $idAviso = $avisoSQL ->insert_id;
+    $avisoSQL->close();
+    $dirigirSQL = mysqli_stmt_init($conexionBD);
+    if ($destinatario == "Todos"){
+      $sentenciaDirigir = "INSERT INTO DIRIGIR_AVISO(`Aviso`,`Destinatario`,`Leido`) SELECT ?, UE.Nia, 0 FROM USUARIO_ESTUDIANTE AS UE";
+      $dirigirSQL->prepare($sentenciaDirigir);
+      $dirigirSQL -> bind_param("s",$idAviso);
+      $dirigirSQL -> execute();
+      $dirigirSQL -> close();
+    }else{
+      $sentenciaDirigir = "INSERT INTO DIRIGIR_AVISO(`Aviso`,`Destinatario`,`Leido`) VALUES (?,(SELECT Nia FROM USUARIO_ESTUDIANTE WHERE Nombre = ?),0)";
+      $dirigirSQL->prepare($sentenciaDirigir);
+      $dirigirSQL -> bind_param("ss",$idAviso,$destinatario);
+      $dirigirSQL -> execute();
+      $dirigirSQL -> close();
+    }
+    return true;
+  }
+  error_log("No se ha podido enviar el aviso.");
+  return false;
+}
+?>
+<?php
+function comprobarLoginAlumno($conexionBD,$login){
+  $sentencia = "SELECT COUNT(*) FROM USUARIO_ESTUDIANTE WHERE Login = ?";
+  $sentenciaSQL = mysqli_stmt_init($conexionBD);
+  $okflag = $sentenciaSQL -> prepare($sentencia);
+  if ($okflag){
+    $sentenciaSQL -> bind_param("s", $login);
+    $sentenciaSQL->execute();
+    $resultado = $sentenciaSQL -> get_result();
+    if (mysqli_num_rows($resultado) > 0) {
+			$fila= mysqli_fetch_assoc($resultado);
+		} else {
+			$fila= array();
+		}
+    mysqli_free_result($resultado);
+    mysqli_stmt_close($sentenciaSQL);
+    if ($fila["COUNT(*)"] == 0){
+      return true;
+    }
+  }
+  return false;
+}
+?>
+<?php
+function comprobarLoginProfesor($conexionBD,$login){
+  $sentencia = "SELECT COUNT(*) FROM USUARIO_PROFESOR WHERE Login = ?";
+  $sentenciaSQL = mysqli_stmt_init($conexionBD);
+  $okflag = $sentenciaSQL -> prepare($sentencia);
+  if ($okflag){
+    $sentenciaSQL -> bind_param("s", $login);
+    $sentenciaSQL->execute();
+    $resultado = $sentenciaSQL -> get_result();
+    if (mysqli_num_rows($resultado) > 0) {
+			$fila= mysqli_fetch_assoc($resultado);
+		} else {
+			$fila= array();
+		}
+    mysqli_free_result($resultado);
+    mysqli_stmt_close($sentenciaSQL);
+    if ($fila["COUNT(*)"] == 0){
+      return false;
+    }
+  }
+  return true;
+}
+?>
+<?php
+function getMensajesProfesor($conexionBD, $login , $filtro,$pagina) {
+  $numMensajes = 10;
+  $patron = "%".$filtro."%";
+  $sentenciaUnicos = 'SELECT * FROM ((SELECT A.Asunto, A.Contenido, A.Fecha, UE.Nombre FROM AVISO AS A
+  INNER JOIN USUARIO_PROFESOR AS UP ON A.Autor = UP.Nia
+  INNER JOIN DIRIGIR_AVISO AS DA ON DA.Aviso = A.Id                                                                                 
+  INNER JOIN USUARIO_ESTUDIANTE AS UE ON UE.Nia = DA.Destinatario
+  WHERE UP.Login = ? AND (A.Contenido LIKE ? OR A.Asunto LIKE ?) AND A.Id NOT IN (SELECT A.Id FROM AVISO AS A
+  INNER JOIN DIRIGIR_AVISO AS DA ON DA.Aviso = A.Id                                                                                 
+  GROUP BY Id HAVING COUNT(*)>1)) UNION(                                                                                           
+  SELECT A.Asunto, A.Contenido, A.Fecha, "Todos" FROM AVISO AS A                                                                   
+  INNER JOIN USUARIO_PROFESOR AS UP ON UP.Nia = A.Autor                                                                             
+  INNER JOIN DIRIGIR_AVISO AS DA ON DA.Aviso = A.Id                                                                                 
+  WHERE UP.Login = ? AND (A.Contenido LIKE ? OR A.Asunto LIKE ?)
+  GROUP BY A.Id                                                                                                                     
+  HAVING COUNT(*) > 1                                                                                                               
+  )) AS TABLA LIMIT ?,?;';
+  $unicosSQL = mysqli_stmt_init($conexionBD);
+  $okflag = $unicosSQL -> prepare($sentenciaUnicos);
+  
+  if (!$okflag){
+    return ERROR_CONSULTA_PERSONA;
+  }
+
+  $unicosSQL -> bind_param("ssssssii", $login, $patron, $patron, $login, $patron, $patron, $pagina, $numMensajes);
+  $unicosSQL -> execute();
+  $resUnicos = $unicosSQL -> get_result(); 
+  
+  while($fila = $resUnicos->fetch_row()){
+      $filasUnicos[] = $fila; 
+  }
+  $unicosSQL-> close();
+  $resUnicos ->close();
+
+	return $filasUnicos;
+}
+?>
+<?php
+function getPaginasMensajesProfesor($conexionBD, $login, $filtro){
+  $numMensajes = 10;
+  $patron = "%".$filtro."%";
+  $sentencia = 'SELECT COUNT(*) FROM ((SELECT A.Asunto, A.Contenido, A.Fecha, UE.Nombre FROM AVISO AS A
+  INNER JOIN USUARIO_PROFESOR AS UP ON A.Autor = UP.Nia
+  INNER JOIN DIRIGIR_AVISO AS DA ON DA.Aviso = A.Id
+  INNER JOIN USUARIO_ESTUDIANTE AS UE ON UE.Nia = DA.Destinatario
+  WHERE UP.Login = ? AND (A.Contenido LIKE ? OR A.Asunto LIKE ?) AND A.Id NOT IN (SELECT A.Id FROM AVISO AS A
+  INNER JOIN DIRIGIR_AVISO AS DA ON DA.Aviso = A.Id
+  GROUP BY Id HAVING COUNT(*)>1)) UNION(
+  SELECT A.Asunto, A.Contenido, A.Fecha, "Todos" FROM AVISO AS A
+  INNER JOIN USUARIO_PROFESOR AS UP ON UP.Nia = A.Autor
+  INNER JOIN DIRIGIR_AVISO AS DA ON DA.Aviso = A.Id
+  WHERE UP.Login = ? AND (A.Contenido LIKE ? OR A.Asunto LIKE ?)
+  GROUP BY A.Id
+  HAVING COUNT(*) > 1       
+  )) AS TABLA;';
+  $sentenciaSQL = mysqli_stmt_init($conexionBD);
+  mysqli_stmt_prepare($sentenciaSQL, $sentencia);
+  mysqli_stmt_bind_param($sentenciaSQL, "ssssss", $login,$patron,$patron, $login,$patron,$patron);
+  mysqli_stmt_execute($sentenciaSQL);
+  $resultado = mysqli_stmt_get_result($sentenciaSQL);
+  
+  if (mysqli_num_rows($resultado) > 0) {
+			$fila= mysqli_fetch_assoc($resultado);
+		} else {
+			$fila= array();
+		}
+  mysqli_free_result($resultado);
+  mysqli_stmt_close($sentenciaSQL);
+
+  // return $login;
+  // return $fila["COUNT(*)"];
+  return intdiv($fila["COUNT(*)"],$numMensajes)+1;
 }
 ?>

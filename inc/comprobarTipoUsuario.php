@@ -13,7 +13,7 @@ function comprobarEstudiante($conexionBD){
     echo '
     <script>
       alert("Esta página está limitada a alumnos.");
-      window.location = "verAvisosAlumno.php";
+      window.location = "index.php";
     </script>
     ';
     exit();
@@ -42,7 +42,7 @@ function comprobarProfesor($conexionBD){
     echo '
     <script>
       alert("Esta página está limitada a profesores.");
-      window.location = "verAvisosAlumno.php";
+      window.location = "index.php";
     </script>
     ';
     exit();
