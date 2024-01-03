@@ -504,7 +504,7 @@ img.login-animado{
 }
 
 
-.enviar-contenedor > fieldset > input:focus, .enviar-contenedor > fieldset > textarea:focus{
+.enviar-contenedor > fieldset > input:focus, .enviar-contenedor > div > textarea:focus{
   outline: none !important;
   background: none;
 }
@@ -521,4 +521,16 @@ img.login-animado{
 
 .boton:hover{
   background-color: var(--color-secundario-hover);
+}
+.alumnos-alumno{
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 10px;
+  border-color: black;
+  border: solid;
+  border-width: 2px;
+  width: 100%;
+  align-self: center;
+  background-color: lightgray;
+  user-select: none;
 }
