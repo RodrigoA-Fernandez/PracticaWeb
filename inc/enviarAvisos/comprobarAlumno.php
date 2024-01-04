@@ -1,6 +1,6 @@
 <?php include_once "../codigo_inicializacion.php"?>
 <?php
-  $alumnos = getAlumnos($conexionBD);
+  $alumnos = getNombresAlumnos($conexionBD);
   $alumno = htmlspecialchars($_POST["alumno"]);
   $band = false; 
   foreach ($alumnos as $a) {

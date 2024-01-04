@@ -87,7 +87,7 @@ function comprobarLogin($conexionBD, $login, $contraseniaHash) {
 
 <?php
 function getMensajesEstudiante($conexionBD, $login,$filtro ,$pagina) {
-  $numMensajes = 10;
+  $numMensajes = 9;
   $patron ="%".$filtro."%";
   $sentencia = 'SELECT UP.Nombre, A.Fecha, A.Asunto, A.Contenido, A.Id, DA.Leido FROM DIRIGIR_AVISO AS DA INNER JOIN AVISO AS A ON DA.Aviso = A.Id INNER JOIN USUARIO_PROFESOR AS UP ON UP.Nia = A.Autor INNER JOIN USUARIO_ESTUDIANTE AS UE ON DA.Destinatario = UE.Nia WHERE( (UE.Login = ?) AND (A.Asunto LIKE ? OR A.Contenido LIKE ?))  ORDER BY A.Fecha LIMIT ?,?;';
 	$sentenciaSQL= mysqli_stmt_init($conexionBD);
@@ -111,7 +111,7 @@ function getMensajesEstudiante($conexionBD, $login,$filtro ,$pagina) {
 ?>
 <?php
 function getPaginasMensajes($conexionBD, $login, $filtro){
-  $numMensajes = 10;
+  $numMensajes = 9;
   $patron = "%".$filtro."%";
   $sentencia = 'SELECT COUNT(*) FROM DIRIGIR_AVISO AS DA INNER JOIN AVISO AS A ON DA.Aviso = A.Id INNER JOIN USUARIO_PROFESOR AS UP ON UP.Nia = A.Autor INNER JOIN USUARIO_ESTUDIANTE AS UE ON DA.Destinatario = UE.Nia WHERE( (UE.Login = ? OR UE.Nia = 0) AND (A.Asunto LIKE ? OR A.Contenido LIKE ?))';
   $sentenciaSQL = mysqli_stmt_init($conexionBD);
@@ -156,11 +156,31 @@ function cambiarContrasenia($conexionBD, $login,$nuevaContrasenia){
 }
 ?>
 <?php
-function getAlumnos($conexionBD){
+function getNombresAlumnos($conexionBD){
   $sentencia = 'SELECT `Nombre` from `USUARIO_ESTUDIANTE`';
   $sentenciaSQL = mysqli_stmt_init($conexionBD);
   $okflag = mysqli_stmt_prepare($sentenciaSQL,$sentencia);
   if ($okflag){
+    mysqli_stmt_execute($sentenciaSQL);
+    $resultado = mysqli_stmt_get_result($sentenciaSQL);
+    while($fila = $resultado->fetch_row()){
+      $filas[] = $fila; 
+    }
+    $resultado->close();
+    $sentenciaSQL->close();
+    return $filas;
+  }
+  return [];
+}
+?>
+<?php
+function getAlumnos($conexionBD,$filtro){
+  $patron = "%".$filtro."%";
+  $sentencia = 'SELECT `Nia`,`Nombre`,`Login` from `USUARIO_ESTUDIANTE` WHERE (LOWER(Nombre) LIKE LOWER(?) OR LOWER(Login) LIKE LOWER(?))';
+  $sentenciaSQL = mysqli_stmt_init($conexionBD);
+  $okflag = mysqli_stmt_prepare($sentenciaSQL,$sentencia);
+  if ($okflag){
+    $sentenciaSQL -> bind_param("ss",$patron,$patron);
     mysqli_stmt_execute($sentenciaSQL);
     $resultado = mysqli_stmt_get_result($sentenciaSQL);
     while($fila = $resultado->fetch_row()){
@@ -255,7 +275,7 @@ function comprobarLoginProfesor($conexionBD,$login){
 ?>
 <?php
 function getMensajesProfesor($conexionBD, $login , $filtro,$pagina) {
-  $numMensajes = 10;
+  $numMensajes = 9;
   $patron = "%".$filtro."%";
   $sentenciaUnicos = 'SELECT * FROM ((SELECT A.Asunto, A.Contenido, A.Fecha, UE.Nombre FROM AVISO AS A
   INNER JOIN USUARIO_PROFESOR AS UP ON A.Autor = UP.Nia
@@ -293,7 +313,7 @@ function getMensajesProfesor($conexionBD, $login , $filtro,$pagina) {
 ?>
 <?php
 function getPaginasMensajesProfesor($conexionBD, $login, $filtro){
-  $numMensajes = 10;
+  $numMensajes = 9;
   $patron = "%".$filtro."%";
   $sentencia = 'SELECT COUNT(*) FROM ((SELECT A.Asunto, A.Contenido, A.Fecha, UE.Nombre FROM AVISO AS A
   INNER JOIN USUARIO_PROFESOR AS UP ON A.Autor = UP.Nia

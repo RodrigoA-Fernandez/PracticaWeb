@@ -10,7 +10,7 @@
     <datalist id = "destinatarios">
       <option value="Todos">
 <?php
-  foreach (getAlumnos($conexionBD) as &$alumno) {
+  foreach (getNombresAlumnos($conexionBD) as &$alumno) {
     echo '<option value="'.$alumno["0"].'">'; 
   }
 ?>

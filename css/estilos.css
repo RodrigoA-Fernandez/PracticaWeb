@@ -522,15 +522,58 @@ img.login-animado{
 .boton:hover{
   background-color: var(--color-secundario-hover);
 }
-.alumnos-alumno{
-  margin-left: auto;
-  margin-right: auto;
+
+.alumnos-contenedor{
+  margin: 20px auto 20px auto;
+  border:var(--color-secundario) solid;
   border-radius: 10px;
-  border-color: black;
-  border: solid;
-  border-width: 2px;
+  background-color: beige;
+  max-width: 540px;
+}
+
+.alumnos-cabecera th{
+  font-family: "Segoe UI Bold";
+  background-color: var(--color-secundario);
+  color: white;
+  height: 35px;
+}
+
+.table-fixed tbody {
+  max-height: 700px;
+  overflow-y: auto;
   width: 100%;
-  align-self: center;
-  background-color: lightgray;
-  user-select: none;
+}
+.table-fixed thead, .table-fixed tbody, .table-fixed tr, .table-fixed td, .table-fixed th {
+  display: block;
+}
+.table-fixed tbody td, .table-fixed thead > tr> th {
+  float: left;
+  border-bottom-width: 0;
+}
+.table-fixed tbody td{
+  overflow-x: auto;
+  overflow-y: hidden;
+  height: 40px;
+}
+.table-fixed tbody tr td> img{
+  display: block;
+  margin-left: auto;
+}
+.table-fixed tbody::-webkit-scrollbar {
+  width: 10px;
+}
+
+ .table-fixed tbody::-webkit-scrollbar-track {
+  background-color: var(--color-secundario);  
+  border-bottom-right-radius: 5px;
+}
+
+ .table-fixed tbody::-webkit-scrollbar-thumb {
+  border-left: 4px solid var(--color-secundario);
+  border-right: 2px solid var(--color-secundario);
+  border-top: 5px solid var(--color-secundario);
+  border-bottom: 5px solid var(--color-secundario);
+  border-bottom-right-radius: 5px;
+  min-height: 20px;
+  background-color: white;
 }
