@@ -9,16 +9,17 @@ function nuevoEstudiante($conexionBD, $nombre, $contrasenia, $login) {
 		// vincular los parámetros para los marcadores 
 		mysqli_stmt_bind_param($sentenciaSQL, "sss", $nombre, $contraseniaHash, $login);
 		// ejecutar la consulta 
-    
-    $okFlag= mysqli_stmt_execute($sentenciaSQL);
-  
+    try{
+      mysqli_stmt_execute($sentenciaSQL);
+    }catch(Exception $e){
+      $okFlag = false;
+    }
 		// destruir la sentencia 
 		mysqli_stmt_close($sentenciaSQL);
 	}
 
 	if ($okFlag) {
 		return OK;
-    echo("OK");
 	} else {
 		return ERROR_ALTA_PERSONA;
 	}
@@ -176,7 +177,7 @@ function getNombresAlumnos($conexionBD){
 <?php
 function getAlumnos($conexionBD,$filtro){
   $patron = "%".$filtro."%";
-  $sentencia = 'SELECT `Nia`,`Nombre`,`Login` from `USUARIO_ESTUDIANTE` WHERE (LOWER(Nombre) LIKE LOWER(?) OR LOWER(Login) LIKE LOWER(?))';
+  $sentencia = 'SELECT `Nia`,`Nombre`,`Login` from `USUARIO_ESTUDIANTE` WHERE (LOWER(Nombre) LIKE LOWER(?) OR LOWER(Login) LIKE LOWER(?)) ORDER BY Nombre';
   $sentenciaSQL = mysqli_stmt_init($conexionBD);
   $okflag = mysqli_stmt_prepare($sentenciaSQL,$sentencia);
   if ($okflag){
@@ -234,6 +235,29 @@ function comprobarLoginAlumno($conexionBD,$login){
   $okflag = $sentenciaSQL -> prepare($sentencia);
   if ($okflag){
     $sentenciaSQL -> bind_param("s", $login);
+    $sentenciaSQL->execute();
+    $resultado = $sentenciaSQL -> get_result();
+    if (mysqli_num_rows($resultado) > 0) {
+			$fila= mysqli_fetch_assoc($resultado);
+		} else {
+			$fila= array();
+		}
+    mysqli_free_result($resultado);
+    mysqli_stmt_close($sentenciaSQL);
+    if ($fila["COUNT(*)"] == 0){
+      return true;
+    }
+  }
+  return false;
+}
+?>
+<?php
+function comprobarNombreAlumno($conexionBD,$nombre){
+  $sentencia = "SELECT COUNT(*) FROM USUARIO_ESTUDIANTE WHERE Nombre = ?";
+  $sentenciaSQL = mysqli_stmt_init($conexionBD);
+  $okflag = $sentenciaSQL -> prepare($sentencia);
+  if ($okflag){
+    $sentenciaSQL -> bind_param("s", $nombre);
     $sentenciaSQL->execute();
     $resultado = $sentenciaSQL -> get_result();
     if (mysqli_num_rows($resultado) > 0) {
@@ -346,5 +370,26 @@ function getPaginasMensajesProfesor($conexionBD, $login, $filtro){
   // return $login;
   // return $fila["COUNT(*)"];
   return intdiv($fila["COUNT(*)"],$numMensajes)+1;
+}
+?>
+<?php
+function modificarAlumno($conexionBD, $id, $nombre, $login){
+  $senteciaSQL = mysqli_stmt_init($conexionBD);
+  // error_log("Valores:".$nombre.",".$login);
+  if ($nombre ==""){
+    $sentencia = "UPDATE `USUARIO_ESTUDIANTE` SET Login = ? WHERE Nia = ?";
+    $senteciaSQL -> prepare($sentencia);
+    $senteciaSQL -> bind_param("si", $login, $id);
+  }else if ($login == ""){
+    $sentencia = "UPDATE `USUARIO_ESTUDIANTE` SET Nombre = ? WHERE Nia = ?";
+    $senteciaSQL -> prepare($sentencia);
+    $senteciaSQL -> bind_param("si", $nombre, $id);
+  }else{
+    $sentencia = "UPDATE `USUARIO_ESTUDIANTE` SET Nombre = ?,Login = ? WHERE Nia = ?";
+    $senteciaSQL -> prepare($sentencia);
+    $senteciaSQL -> bind_param("ssi", $nombre,$login, $id);
+  }
+  $senteciaSQL ->execute();
+  $senteciaSQL -> close();
 }
 ?>

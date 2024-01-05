@@ -12,25 +12,30 @@
                   <th scope="col" class="col-2" >Login</th>
                   <th scope="col" class="col-6" > </th>
               </tr>
-          <tbody>
-<?php
-foreach (getAlumnos($conexionBD,"") as $alumno) {
-    echo'     <tr scope="row" id = "'.$alumno[0].'">
-                <td class="col-4">'.$alumno[1].'</td>
-                <td class="col-6">'.$alumno[2].'</td>
-                <td class="col-2">
-                    <img src="assets/editar.svg" height="20" >
-                </td>
-              </tr>';
-  }
-?>
-          </tbody>
         </thead>
+        <tbody id = "nuevoAlumno" style="border-right: solid var(--color-secundario) 10px;">
+          <tr scope="row">
+            <td class="col-4"><input class="alumnos-input" id="nombreNuevo" placeholder="Nuevo Nombre"></input></td>
+            <td class="col-6"><input class="alumnos-input" id="loginNuevo" placeholder="Nuevo Login"></input></td>
+            <td class="col-2">
+              <div class="d-flex justify-content-end">
+                <img  class="check" src="assets/check.svg" size="20">
+                <img  class="cancel" src="assets/cancel.svg" size="20">
+              </div>
+            </td>
+          </tr>
+        </tbody>
+        <tbody id="cuerpo-tabla">
+
+        </tbody>
       </table>
     </div>
   </div>
 </div>
-<script src="js/editarAlumno.js">
+<script src="js/cargarAlumnos.js">
+</script>
+
+<script src="js/insertarAlumno.js">
 </script>
 <?php piePlantilla()?>
 <?php include_once "inc/codigo_finalizacion.php"; ?>

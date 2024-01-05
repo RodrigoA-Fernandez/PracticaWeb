@@ -1,24 +1,24 @@
 @font-face {
-    font-family: 'Segoe UI Bold';
-    font-style: normal;
-    font-weight: bold;
-    src: url('/fonts/SegoeUI/Segoe UI Bold.woff') format('woff');
+  font-family: "Segoe UI Bold";
+  font-style: normal;
+  font-weight: bold;
+  src: url("/fonts/SegoeUI/Segoe UI Bold.woff") format("woff");
 }
 @font-face {
-    font-family: 'Segoe UI';
-    font-style: normal;
-    font-weight: normal;
-    src: url('/fonts/SegoeUI/Segoe UI.woff') format('woff');
+  font-family: "Segoe UI";
+  font-style: normal;
+  font-weight: normal;
+  src: url("/fonts/SegoeUI/Segoe UI.woff") format("woff");
 }
 
-:root{
-  --color-secundario: #C61156;
-  --color-secundario-hover: #B40044;
+:root {
+  --color-secundario: #c61156;
+  --color-secundario-hover: #b40044;
   --fondo: rgb(242, 243, 247);
   --fuente: "Segoe UI Bold";
 }
 
-.contrasenias-formulario{
+.contrasenias-formulario {
   width: 60%;
   margin: 20px auto 20px auto;
   border: var(--color-secundario) solid;
@@ -33,14 +33,14 @@
   display: flexbox;
 }
 
-.contrasenias-formulario h1{
+.contrasenias-formulario h1 {
   font-family: var(--fuente);
   font-size: 1em;
   margin: auto;
   margin-bottom: 10px;
 }
 
-.contrasenias-formulario .contrasenias-contenedorInput{
+.contrasenias-formulario .contrasenias-contenedorInput {
   border: black solid 3px;
   border-radius: 10px;
   background-color: lightgray;
@@ -50,7 +50,7 @@
   margin: auto;
 }
 
-.contrasenias-formulario .contrasenias-contenedorInput input{
+.contrasenias-formulario .contrasenias-contenedorInput input {
   border: none;
   font-family: var(--fuente);
   background: none;
@@ -58,7 +58,7 @@
   outline: none;
 }
 
-.contrasenias-formulario > div > button{
+.contrasenias-formulario > div > button {
   border-radius: 10px;
   border: none;
   font-family: var(--fuente);
@@ -67,15 +67,15 @@
   padding: 5px;
 }
 
-.contrasenias-formulario > div > button:hover{
+.contrasenias-formulario > div > button:hover {
   background-color: var(--color-secundario-hover);
 }
 
-.contrasenias-formulario *{
+.contrasenias-formulario * {
   margin: 4px;
 }
 
-.contrasenias-mensajeError{
+.contrasenias-mensajeError {
   border-color: var(--color-secundario);
   border-width: 4px;
   border-style: solid;
@@ -84,7 +84,7 @@
   background-color: lightgray;
   backdrop-filter: blur(10px);
   border-radius: 10px;
-  flex-direction: row;  
+  flex-direction: row;
   align-items: center;
   margin-top: 10px;
 }
@@ -97,7 +97,7 @@
   text-align: left;
 }
 
-.contrasenias-mensajeCambio{
+.contrasenias-mensajeCambio {
   border-color: var(--color-secundario);
   border-width: 4px;
   border-style: solid;
@@ -106,7 +106,7 @@
   background-color: lightgray;
   backdrop-filter: blur(10px);
   border-radius: 10px;
-  flex-direction: row;  
+  flex-direction: row;
   align-items: center;
   margin-top: 10px;
 }
@@ -118,9 +118,8 @@
   font-size: 1em;
   text-align: center;
 }
-@media (max-width: 200px){
-  
-  .contrasenias-formulario{
+@media (max-width: 200px) {
+  .contrasenias-formulario {
     width: 100%;
     margin-right: 0;
     margin-left: 0;
@@ -129,29 +128,28 @@
     padding-left: 0;
   }
 
-  .contrasenias-formulario .contrasenias-input{
+  .contrasenias-formulario .contrasenias-input {
     width: 70%;
     min-width: 0;
   }
-
 }
 
-.login-body{
+.login-body {
   width: 80%;
   margin-left: auto;
   margin-right: auto;
-  background: url('/assets/fondo.webp') no-repeat center center fixed;
+  background: url("/assets/fondo.webp") no-repeat center center fixed;
   background-size: cover;
 }
 .login-wrapper {
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100vh;
 }
 
-.login-input-wrapper{
+.login-input-wrapper {
   display: flex;
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.5);
@@ -163,14 +161,13 @@
   border-style: solid;
   border-width: 2px;
   font-family: var(--fuente);
-  
 }
 
-.login-input-wrapper:hover{
+.login-input-wrapper:hover {
   border-color: var(--color-secundario);
 }
 
-.login-input{
+.login-input {
   width: 90%;
   color: white;
   background-color: rgba(0, 0, 0, 0);
@@ -178,7 +175,7 @@
   font-family: var(--fuente);
 }
 .login-input:autofill,
-.login-input:-webkit-auto-fill{
+.login-input:-webkit-auto-fill {
   width: 90%;
   color: white;
   background-color: rgba(0, 0, 0, 0);
@@ -186,28 +183,27 @@
   font-family: var(--fuente);
 }
 
-.login-label{
+.login-label {
   font-family: var(--fuente);
 }
 
-.login-input:focus{
-  outline:none;
+.login-input:focus {
+  outline: none;
 }
 
-img.login-logo{
+img.login-logo {
   border-radius: 10px;
   margin: 10px;
 }
 
-img.login-animado{
+img.login-animado {
   animation-name: rotar-logo;
   animation-duration: 0.75s;
   animation-fill-mode: forwards;
 }
 
-
 @keyframes rotar-logo {
-  100%{
+  100% {
     transform: rotate(360deg);
   }
 }
@@ -225,18 +221,18 @@ img.login-animado{
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: .5rem;
+  gap: 0.5rem;
   border: 0;
   padding: 0;
 }
 
-.login-form__headline{
+.login-form__headline {
   text-align: center;
   overflow-wrap: anywhere;
   margin: 0 auto;
 }
 
-.login-guest-box{
+.login-guest-box {
   color: white;
   background-color: rgba(0, 0, 0, 0.8);
   padding: 16px;
@@ -248,12 +244,11 @@ img.login-animado{
   display: block;
   backdrop-filter: blur(10px);
   margin: auto;
-
 }
 .login-boton {
   background-color: var(--color-secundario);
   color: #ffffff;
-  margin-top: .5rem;
+  margin-top: 0.5rem;
   margin: 0 auto;
   padding: 0 16px 0 16px;
   position: relative;
@@ -269,25 +264,25 @@ img.login-animado{
   justify-content: center;
   cursor: pointer;
   border-radius: 22px;
-  transition-property: color,border-color,background-color;
-  transition-duration: .1s;
+  transition-property: color, border-color, background-color;
+  transition-duration: 0.1s;
   transition-timing-function: linear;
   font-family: var(--fuente);
 }
 
-.login-boton:hover{
+.login-boton:hover {
   background: var(--color-secundario-hover);
 }
 
-.login-mensajeError{
+.login-mensajeError {
   border-color: red;
   border-width: 2px;
   border-style: solid;
   font-family: "SegoeUI";
   align-self: center;
-  background-color: rgba(0, 0, 0, 0.login-5);
+  background-color: rgba(0, 0, 0, 0login-5);
   border-radius: 10px;
-  flex-direction: row;  
+  flex-direction: row;
   align-items: center;
   margin-top: 10px;
 }
@@ -296,19 +291,22 @@ img.login-animado{
   margin: 10px;
   color: red;
   font-family: var(--fuente);
-  font-size:0.login-8em;
+  font-size: 0login-8em;
 }
 
-.login-loginIncorrecto{
+.login-loginIncorrecto {
   display: none;
 }
-.login-loginVacio{
+.login-loginVacio {
   display: none;
   align-self: center;
 }
 
-.nav-bg{
+.nav-bg {
   background-color: var(--color-secundario);
+}
+.nav-link {
+  padding-left: 10px;
 }
 
 .font {
@@ -317,7 +315,7 @@ img.login-animado{
   color: white;
 }
 
-.logo img{
+.logo img {
   height: 50px;
 }
 
@@ -325,13 +323,13 @@ img.login-animado{
   .navbar {
     padding: 0 1rem;
   }
-  
+
   .nav-pills .nav-link {
     padding-top: 15px;
     padding-bottom: 15px;
     border-radius: 0;
   }
-  .navbar-collapse{
+  .navbar-collapse {
     height: 10vh;
   }
 }
@@ -348,11 +346,11 @@ img.login-animado{
   border-color: black;
 }
 
-.mensajes-mensajes{
+.mensajes-mensajes {
   margin-top: 10px;
   padding: 10px;
 }
-.mensajes-msg{
+.mensajes-msg {
   margin-top: 5px;
   margin-left: auto;
   margin-right: auto;
@@ -365,42 +363,42 @@ img.login-animado{
   background-color: lightgray;
   user-select: none;
 }
-.mensajes-msg:hover{
+.mensajes-msg:hover {
   background-color: gray;
 }
-.mensajes-msg .mensajes-info{
+.mensajes-msg .mensajes-info {
   display: flex;
   flex-direction: row;
   padding: 0 5px 2px 5px;
 }
-.mensajes-msg .mensajes-info .mensajes-autor{
+.mensajes-msg .mensajes-info .mensajes-autor {
   font-family: var(--fuente);
   margin-right: auto;
 }
 
-.mensajes-msg .mensajes-info .mensajes-fecha{
+.mensajes-msg .mensajes-info .mensajes-fecha {
   font-family: "Segoe UI";
 }
 
-.mensajes-msg .mensajes-solida{
+.mensajes-msg .mensajes-solida {
   border: none;
   border-top: 2px solid;
   border-color: black;
   margin: 0;
 }
 
-.mensajes-msg .mensajes-discontinua{
+.mensajes-msg .mensajes-discontinua {
   border: none;
   border-top: 1px dashed black;
   margin: 0;
 }
 
-.mensajes-msg .mensajes-asunto{
+.mensajes-msg .mensajes-asunto {
   margin: 10px;
   font-family: var(--fuente);
 }
 
-.mensajes-msg .mensajes-texto{
+.mensajes-msg .mensajes-texto {
   margin: 10px;
   font-family: "Segoe UI";
 }
@@ -409,24 +407,24 @@ img.login-animado{
   display: none;
 }
 
-.mensajes-noLeido{
+.mensajes-noLeido {
   border-color: var(--color-secundario) !important;
 }
-.mensajes-noLeido *{
+.mensajes-noLeido * {
   border-color: var(--color-secundario) !important;
   color: var(--color-secundario);
 }
 
-.mensajes-contenedorMensajes{
+.mensajes-contenedorMensajes {
   width: 60%;
   margin: 20px auto 20px auto;
-  border:var(--color-secundario) solid;
+  border: var(--color-secundario) solid;
   border-radius: 10px;
   background-color: beige;
   min-width: 300px;
 }
 
-.mensajes-cambioPagina{
+.mensajes-cambioPagina {
   width: 100%;
   background-color: var(--color-secundario);
   border-radius: 5px 5px 0 0;
@@ -434,82 +432,78 @@ img.login-animado{
   text-align: center;
 }
 
-
-.mensajes-cambioPagina > .pagination > li > span{
-    background-color: var(--color-secundario);
-    color: white;
-    font-family: "Segoe UI Bold";
-    font-weight: bold;
-    font-size: 1em;
-    border: none;
-    border-radius: 5px 5px 5px 5px !important;
-  }
-
-.mensajes-cambioPagina > .pagination > li > span:hover{
-    background-color: var(--color-secundario-hover);
-    color: white;
-    font-family: "Segoe UI Bold";
-    font-weight: bold;
-    border: none;
-  }
-
-
-.mensajes-cambioPagina > .pagination > li > .activo{
-  background-color: beige ;
-  color: black ;
-}
-.mensajes-cambioPagina > .pagination > li > .activo:hover{
-  background-color: darbeige ;
-  color: black ;
+.mensajes-cambioPagina > .pagination > li > span {
+  background-color: var(--color-secundario);
+  color: white;
+  font-family: "Segoe UI Bold";
+  font-weight: bold;
+  font-size: 1em;
+  border: none;
+  border-radius: 5px 5px 5px 5px !important;
 }
 
-
-.mensajes-puntos{
-    display: inline;
-  }
-
-@media (max-width: 300px){
-  
-  .mensajes-contenedorMensajes{
-      width: 100%;
-      margin-right: 0;
-      margin-left: 0;
-      min-width: 0px;
-    }
-
-  .mensajes-mensajes{
-      width: 100%;
-      margin: 0;
-    }
-  .mensajes-msg{
-      width: 100%;
-      margin: 0;
-    }
+.mensajes-cambioPagina > .pagination > li > span:hover {
+  background-color: var(--color-secundario-hover);
+  color: white;
+  font-family: "Segoe UI Bold";
+  font-weight: bold;
+  border: none;
 }
 
+.mensajes-cambioPagina > .pagination > li > .activo {
+  background-color: beige;
+  color: black;
+}
+.mensajes-cambioPagina > .pagination > li > .activo:hover {
+  background-color: darbeige;
+  color: black;
+}
 
-.enviar-contenedor{
+.mensajes-puntos {
+  display: inline;
+}
+
+@media (max-width: 300px) {
+  .mensajes-contenedorMensajes {
+    width: 100%;
+    margin-right: 0;
+    margin-left: 0;
+    min-width: 0px;
+  }
+
+  .mensajes-mensajes {
+    width: 100%;
+    margin: 0;
+  }
+  .mensajes-msg {
+    width: 100%;
+    margin: 0;
+  }
+}
+
+.enviar-contenedor {
   width: 60%;
-  border:var(--color-secundario) solid;
+  border: var(--color-secundario) solid;
   border-radius: 10px;
   background-color: beige;
   max-width: 700px;
   padding: 0;
 }
 
-.enviar-contenedor > fieldset > input, .enviar-contenedor > fieldset > textarea{
+.enviar-contenedor > fieldset > input,
+.enviar-contenedor > fieldset > textarea {
   outline: none;
   border: none;
   background: none;
 }
 
-
-.enviar-contenedor > fieldset > input:focus, .enviar-contenedor > div > textarea:focus{
+.enviar-contenedor > fieldset > input:focus,
+.enviar-contenedor > div > textarea:focus {
   outline: none !important;
   background: none;
 }
 
-.boton{
+.boton {
   display: block;
   border-radius: 10px;
   border: none;
@@ -519,19 +513,19 @@ img.login-animado{
   padding: 5px;
 }
 
-.boton:hover{
+.boton:hover {
   background-color: var(--color-secundario-hover);
 }
 
-.alumnos-contenedor{
+.alumnos-contenedor {
   margin: 20px auto 20px auto;
-  border:var(--color-secundario) solid;
+  border: var(--color-secundario) solid;
   border-radius: 10px;
   background-color: beige;
   max-width: 540px;
 }
 
-.alumnos-cabecera th{
+.alumnos-cabecera th {
   font-family: "Segoe UI Bold";
   background-color: var(--color-secundario);
   color: white;
@@ -543,19 +537,24 @@ img.login-animado{
   overflow-y: auto;
   width: 100%;
 }
-.table-fixed thead, .table-fixed tbody, .table-fixed tr, .table-fixed td, .table-fixed th {
+.table-fixed thead,
+.table-fixed tbody,
+.table-fixed tr,
+.table-fixed td,
+.table-fixed th {
   display: block;
 }
-.table-fixed tbody td, .table-fixed thead > tr> th {
+.table-fixed tbody td,
+.table-fixed thead > tr > th {
   float: left;
   border-bottom-width: 0;
 }
-.table-fixed tbody td{
+.table-fixed tbody td {
   overflow-x: auto;
   overflow-y: hidden;
   height: 40px;
 }
-.table-fixed tbody tr td> img{
+.table-fixed tbody tr td > img {
   display: block;
   margin-left: auto;
 }
@@ -563,12 +562,12 @@ img.login-animado{
   width: 10px;
 }
 
- .table-fixed tbody::-webkit-scrollbar-track {
-  background-color: var(--color-secundario);  
+.table-fixed tbody::-webkit-scrollbar-track {
+  background-color: var(--color-secundario);
   border-bottom-right-radius: 5px;
 }
 
- .table-fixed tbody::-webkit-scrollbar-thumb {
+.table-fixed tbody::-webkit-scrollbar-thumb {
   border-left: 4px solid var(--color-secundario);
   border-right: 2px solid var(--color-secundario);
   border-top: 5px solid var(--color-secundario);
@@ -576,4 +575,27 @@ img.login-animado{
   border-bottom-right-radius: 5px;
   min-height: 20px;
   background-color: white;
+}
+
+.alumnos-input {
+  border: none;
+  outline: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+.alumnos-input:-webkit-autofill,
+.alumnos-input:-webkit-autofill:hover,
+.alumnos-input:-webkit-autofill:focus,
+.alumnos-textarea:-webkit-autofill,
+.alumnos-textarea:-webkit-autofill:hover,
+.alumnos-textarea:-webkit-autofill:focus,
+.alumnos-select:-webkit-autofill,
+.alumnos-select:-webkit-autofill:hover,
+.alumnos-select:-webkit-autofill:focus {
+  border: none;
+  -webkit-text-fill-color: none;
+  -webkit-box-shadow: 0 0 0px 1000px none inset;
+  transition: background-color 5000s ease-in-out 0s;
 }
