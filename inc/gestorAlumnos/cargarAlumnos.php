@@ -6,7 +6,10 @@ foreach (getAlumnos($conexionBD,$filtro) as $alumno) {
                 <td class="col-4 nombre">'.$alumno[1].'</td>
                 <td class="col-6 login">'.$alumno[2].'</td>
                 <td class="col-2">
+                  <div class="d-flex justify-content-end">
                     <img class="editar" src="assets/editar.svg" height="20" >
+                    <img class="eliminar" src="assets/delete.svg" height="20" >
+                  </div>
                 </td>
               </tr>';
   }

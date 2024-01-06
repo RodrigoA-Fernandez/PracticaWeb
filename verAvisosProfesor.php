@@ -12,7 +12,7 @@
 <div class="mensajes-mensajes">
 
 <?php 
-$mensajes = getMensajesProfesor($conexionBD, $_SESSION["usuario"]["username"], 0, "");
+$mensajes = getMensajesProfesor($conexionBD, $_SESSION["usuario"]["username"], "", 0);
 
 for ($i=0; $i < count($mensajes) ; $i++) { 
   $fecha = strtotime($mensajes[$i][2]);

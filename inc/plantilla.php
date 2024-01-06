@@ -73,9 +73,15 @@ const TITULO_PAGINA = "Gestor de Avisos UVa";
           ';
           }
           ?>
-
+          
         </ul>
-      
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link font">
+              Salir
+            </a>
+          </li>
+        </ul>
       </div>
     </nav>
 

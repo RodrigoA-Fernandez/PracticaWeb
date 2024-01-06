@@ -37,5 +37,25 @@
 
 <script src="js/insertarAlumno.js">
 </script>
+<script>
+$(function(){
+  $(".eliminar").on("click", function(){
+    let fila = $(this).parent().parent().parent();
+    let nombre = fila.children(".nombre").text();
+    if(confirm("¿Está seguro de eliminar el usuario "+nombre+"?")){
+      $.post(
+        "./inc/gestorAlumnos/eliminar.php",
+        {
+          id: fila.attr("id"),
+        },
+        function (){
+          cargarAlumnos("");
+          alert("Se ha eliminado el alumno " +nombre+"." );
+        }
+      );
+    }
+  });
+});
+</script>
 <?php piePlantilla()?>
 <?php include_once "inc/codigo_finalizacion.php"; ?>

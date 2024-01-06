@@ -12,12 +12,12 @@ function cargarAlumnos(filtro) {
       $("#cuerpo-tabla").html(data);
       $(".editar").on("click", function () {
         //No Funciona recargar pq deja de existir temporalmente
-        if ($("#cuerpo-tabla").children(".check").length) {
+        if ($("#cuerpo-tabla").find(".check").length) {
           return;
         }
         let linea = $(this).closest("tr");
-        let nombre = linea.children(".nombre").text();
-        let login = linea.children(".login").text();
+        let nombre = linea.find(".nombre").text();
+        let login = linea.find(".login").text();
 
         $.ajax({
           type: "POST",
@@ -31,7 +31,7 @@ function cargarAlumnos(filtro) {
         }).done(function (data) {
           linea.html(data);
           $("#cuerpo-tabla")
-            .children(".check")
+            .find(".check")
             .on("click", function () {
               let n = $("#nombre").val();
               let l = $("#login").val();
@@ -57,7 +57,7 @@ function cargarAlumnos(filtro) {
               });
             });
           $("#cuerpo-tabla")
-            .children(".cancel")
+            .find(".cancel")
             .on("click", function () {
               cargarAlumnos(filtro);
             });

@@ -15,6 +15,7 @@
   define("LOGIN_PROFESOR",7);
   define("ERROR_CAMBIO_CONTRASENIA",8);
   define("CAMBIO_CONTRASENIA",9);
+  define("ERROR_BAJA_PERSONA",10);
 	
 	//conexión con base de datos
 	$host = "localhost";

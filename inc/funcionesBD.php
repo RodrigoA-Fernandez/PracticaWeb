@@ -26,6 +26,32 @@ function nuevoEstudiante($conexionBD, $nombre, $contrasenia, $login) {
 }
 ?>
 <?php
+function eliminarEstudiante($conexionBD, $id) {
+	// Preparación consulta inserción nueva persona 
+  $sentenciaSQL = mysqli_stmt_init($conexionBD);
+	$okFlag= mysqli_stmt_prepare($sentenciaSQL, 'DELETE FROM `USUARIO_ESTUDIANTE` WHERE Nia = ?');
+
+	if ($okFlag) {
+		// vincular los parámetros para los marcadores 
+		mysqli_stmt_bind_param($sentenciaSQL, "i", $id);
+		// ejecutar la consulta 
+    try{
+      mysqli_stmt_execute($sentenciaSQL);
+    }catch(Exception $e){
+      $okFlag = false;
+    }
+		// destruir la sentencia 
+		mysqli_stmt_close($sentenciaSQL);
+	}
+
+	if ($okFlag) {
+		return OK;
+	} else {
+		return ERROR_BAJA_PERSONA;
+	}
+}
+?>
+<?php
 function comprobarLogin($conexionBD, $login, $contraseniaHash) {
   $sentenciaSQL= mysqli_stmt_init($conexionBD);
   $okFlag=mysqli_stmt_prepare($sentenciaSQL, 'SELECT COUNT(*) FROM USUARIO_ESTUDIANTE WHERE Login=? AND Contrasenia=?');
@@ -302,19 +328,21 @@ function getMensajesProfesor($conexionBD, $login , $filtro,$pagina) {
   $numMensajes = 9;
   $patron = "%".$filtro."%";
   $sentenciaUnicos = 'SELECT * FROM ((SELECT A.Asunto, A.Contenido, A.Fecha, UE.Nombre FROM AVISO AS A
-  INNER JOIN USUARIO_PROFESOR AS UP ON A.Autor = UP.Nia
-  INNER JOIN DIRIGIR_AVISO AS DA ON DA.Aviso = A.Id                                                                                 
-  INNER JOIN USUARIO_ESTUDIANTE AS UE ON UE.Nia = DA.Destinatario
-  WHERE UP.Login = ? AND (A.Contenido LIKE ? OR A.Asunto LIKE ?) AND A.Id NOT IN (SELECT A.Id FROM AVISO AS A
-  INNER JOIN DIRIGIR_AVISO AS DA ON DA.Aviso = A.Id                                                                                 
-  GROUP BY Id HAVING COUNT(*)>1)) UNION(                                                                                           
-  SELECT A.Asunto, A.Contenido, A.Fecha, "Todos" FROM AVISO AS A                                                                   
-  INNER JOIN USUARIO_PROFESOR AS UP ON UP.Nia = A.Autor                                                                             
-  INNER JOIN DIRIGIR_AVISO AS DA ON DA.Aviso = A.Id                                                                                 
-  WHERE UP.Login = ? AND (A.Contenido LIKE ? OR A.Asunto LIKE ?)
-  GROUP BY A.Id                                                                                                                     
-  HAVING COUNT(*) > 1                                                                                                               
-  )) AS TABLA LIMIT ?,?;';
+INNER JOIN USUARIO_PROFESOR AS UP ON A.Autor = UP.Nia
+INNER JOIN DIRIGIR_AVISO AS DA ON DA.Aviso = A.Id
+INNER JOIN USUARIO_ESTUDIANTE AS UE ON UE.Nia = DA.Destinatario
+WHERE UP.Login = ? AND (A.Contenido LIKE ? OR A.Asunto LIKE ?) AND A.Id NOT IN (SELECT A.Id FROM AVISO AS A
+INNER JOIN DIRIGIR_AVISO AS DA ON DA.Aviso = A.Id
+GROUP BY Id HAVING COUNT(*)>1)) UNION(
+SELECT A.Asunto, A.Contenido, A.Fecha, "Todos" FROM AVISO AS A
+INNER JOIN USUARIO_PROFESOR AS UP ON UP.Nia = A.Autor
+INNER JOIN DIRIGIR_AVISO AS DA ON DA.Aviso = A.Id
+WHERE UP.Login = ? AND (A.Contenido LIKE ? OR A.Asunto LIKE ?)
+GROUP BY A.Id
+HAVING COUNT(*) > 1)) AS T ORDER BY Fecha DESC LIMIT ?,?;';
+
+  error_log($login.", ".$patron);
+
   $unicosSQL = mysqli_stmt_init($conexionBD);
   $okflag = $unicosSQL -> prepare($sentenciaUnicos);
   
