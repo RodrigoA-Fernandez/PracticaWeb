@@ -26,9 +26,7 @@ $(function () {
           login: l,
         },
         function (data) {
-          console.log(data.trim());
           let datos = JSON.parse(data.trim());
-          console.log(datos);
           if (datos["success"] === false) {
             alert("No se ha podido realizar la inserción.\n" + datos["razon"]);
             return;

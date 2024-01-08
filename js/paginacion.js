@@ -17,7 +17,6 @@ $(document).ready(function () {
   });
 
   $(window).on("resize", function () {
-    console.log($(document).width());
     if ($(document).width() > 730) {
       numPestanias = 4;
     } else if ($(document).width() > 300) {

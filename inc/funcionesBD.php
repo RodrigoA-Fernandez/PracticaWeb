@@ -223,7 +223,7 @@ function getAlumnos($conexionBD,$filtro){
 <?php
 function hacerAviso($conexionBD, $destinatario, $asunto, $aviso, $autor){
   if (!comprobarLoginAlumno($conexionBD, $destinatario) ||!comprobarLoginProfesor($conexionBD, $autor) ){
-    error_log("Error: Alumno o Profesor Inexistente");
+    // error_log("Error: Alumno o Profesor Inexistente");
     return false;
   }
   $sentenciaAviso = "INSERT INTO `AVISO`(`Asunto`, `Contenido`, `Autor`) VALUES (?,?,(SELECT Nia FROM USUARIO_PROFESOR WHERE login = ?))";
@@ -250,7 +250,7 @@ function hacerAviso($conexionBD, $destinatario, $asunto, $aviso, $autor){
     }
     return true;
   }
-  error_log("No se ha podido enviar el aviso.");
+  // error_log("No se ha podido enviar el aviso.");
   return false;
 }
 ?>

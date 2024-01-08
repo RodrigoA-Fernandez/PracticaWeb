@@ -5,7 +5,6 @@
 <?php
   $mensajes = getMensajesProfesor($conexionBD, $_SESSION["usuario"]["username"],comprobarEntrada($conexionBD,$_POST["filtro"]), $_POST["pagina"]);
 
-echo "<script>console.log(";
 echo json_encode($mensajes);
 echo ")</script>";
 for ($i=0; $i < count($mensajes) ; $i++) { 

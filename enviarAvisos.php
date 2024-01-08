@@ -86,14 +86,9 @@ function comprobarMensaje(){
 </script>
 <script>
 $(function(){
-  $("#submit").on("click",function(){
-    console.log("a");
-  });
-
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const error = urlParams.get('error');
-  console.log(error);
   if(error == 0){
     alert("Avisos enviados");
   }else if (error == 1){
