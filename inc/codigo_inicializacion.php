@@ -1,4 +1,4 @@
-﻿
+
 <?php
 	// Aquí se escribiría el código que se ejecutará al INICIO de cada script en PHP (código de inicialización)
   ob_start(); //Configuración procesador PHP: activa almacenamiento en buffer de la SALIDA de PHP

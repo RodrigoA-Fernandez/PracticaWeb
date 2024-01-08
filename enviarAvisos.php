@@ -3,7 +3,7 @@
 <?php cabeceraPlantilla()?>
 
 
-<form class="enviar-contenedor container-md mt-2 pt-2" name="enviar" method="post" action="inc/enviarAvisos/enviar.php" onsubmit="return comprobarMensaje()">
+<form class="enviar-contenedor container-md my-5 pt-2 min-vh-50" name="enviar" method="post" action="inc/enviarAvisos/enviar.php" onsubmit="return comprobarMensaje()">
   <fieldset class="col-md mb-3 mr-3 ml-1">
     <!-- <label for="destinatario" class="form-label" style="font-family: 'Segoe UI Bold';">Destinatario</label> -->
     <input type="text" class="form-control shadow-none input-md" name="destinatario" id="destinatario" list="destinatarios" style="font-family: 'Segoe UI'" placeholder='"Todos" o Nombre y Apellidos del Alumno'>

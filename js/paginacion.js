@@ -27,6 +27,21 @@ $(document).ready(function () {
     }
     cargarBotonera();
   });
+  $("#buscar").on("click", function(){
+    $(".mensajes-mensajes").load(
+          "inc/visorAlumnos/cargarAvisos.php",
+          {
+            filtro: $("#busqueda").val(),
+            pagina: pagina,
+          },
+          function () {
+            $(".mensajes-msg").ready(function () {
+              inicializarMensajes();
+              cargarBotonera();
+            });
+          },
+        );
+  });
 });
 
 function cargarBotonera() {
@@ -46,7 +61,7 @@ function asignarBotones() {
   $.ajax({
     url: "./inc/visorAlumnos/getNumPaginas.php",
     type: "POST",
-    data: { filtro: $(".busqueda input").val() },
+    data: { filtro: $("#busqueda").val() },
     success: function (data) {
       $("#ultimo").off();
       $("#ultimo").click(function () {
@@ -81,7 +96,7 @@ function cambiarPagina(pagCambio, modo) {
   $.ajax({
     url: "./inc/visorAlumnos/getNumPaginas.php",
     type: "POST",
-    data: { filtro: $(".busqueda input").val() },
+    data: { filtro: $("#busqueda").val() },
     success: function (data) {
       if (pagCambio >= Number(data)) {
         pagina = Number(data) - 1;
@@ -91,7 +106,7 @@ function cambiarPagina(pagCambio, modo) {
         $(".mensajes-mensajes").load(
           "inc/visorAlumnos/cargarAvisos.php",
           {
-            filtro: $(".busqueda input").val(),
+            filtro: $("#busqueda").val(),
             pagina: pagina,
           },
           function () {
@@ -111,4 +126,5 @@ function cambiarPagina(pagCambio, modo) {
       }
     },
   });
+
 }

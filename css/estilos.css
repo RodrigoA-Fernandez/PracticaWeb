@@ -18,6 +18,10 @@
   --fuente: "Segoe UI Bold";
 }
 
+html {
+  height: 100%;
+}
+
 .contrasenias-formulario {
   width: 60%;
   margin: 20px auto 20px auto;
@@ -346,6 +350,10 @@ img.login-animado {
   border-color: black;
 }
 
+.mensajes-busqueda {
+  background-color: var(--color-secundario);
+}
+
 .mensajes-mensajes {
   margin-top: 10px;
   padding: 10px;
@@ -598,4 +606,9 @@ img.login-animado {
   -webkit-text-fill-color: none;
   -webkit-box-shadow: 0 0 0px 1000px none inset;
   transition: background-color 5000s ease-in-out 0s;
+}
+
+.pie {
+  background-color: var(--color-secundario);
+  width: 100%;
 }

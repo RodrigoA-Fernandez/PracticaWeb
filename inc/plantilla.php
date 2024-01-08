@@ -76,7 +76,7 @@ const TITULO_PAGINA = "Gestor de Avisos UVa";
           
         </ul>
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
+          <li class="nav-item" id="salir">
             <a class="nav-link font">
               <img style="width: 30px; height: auto;" src="./assets/salida.svg" size="20">
             </a>
@@ -84,7 +84,7 @@ const TITULO_PAGINA = "Gestor de Avisos UVa";
         </ul>
       </div>
     </nav>
-    <div class="contenido">
+    <div class="contenido min-vh-100">
 
   
 
@@ -93,11 +93,18 @@ const TITULO_PAGINA = "Gestor de Avisos UVa";
     
 <?php function piePlantilla() { ?>
   </div>
-    <footer class=" pie p-0">
-      Información copyright
+    <footer class=" pie p-0" style="font-family: 'Segoe UI Bold'; color: white; text-align: center;">
+      Práctica hecha por Rodrigo Alejandro Fernández Vilorio
 	</footer>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+    <script>
+    $(function(){
+      $("#salir").on("click",function(){
+        window.location.replace("index.php");
+      });
+    })
+    </script>
 </body>
 </html>
 <?php } ?>
