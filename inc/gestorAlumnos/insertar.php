@@ -1,7 +1,7 @@
 <?php include_once "../codigo_inicializacion.php"; ?>
 <?php
-$nombre = htmlspecialchars($_POST["nombre"]);
-$login = htmlspecialchars($_POST["login"]);
+$nombre = comprobarEntrada($conexionBD,$_POST["nombre"]);
+$login = comprobarEntrada($conexionBD,$_POST["login"]);
 $contra = randomPassword();
 
 $return = array("contrasenia" => $contra);

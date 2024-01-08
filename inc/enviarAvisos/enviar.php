@@ -1,8 +1,8 @@
 <?php include_once "../codigo_inicializacion.php"?>
 <?php
-$destinatario = htmlspecialchars($_POST["destinatario"]);
-$asunto = htmlspecialchars($_POST["asunto"]);
-$aviso = htmlspecialchars($_POST["aviso"]);
+$destinatario = comprobarEntrada($conexionBD,$_POST["destinatario"]);
+$asunto = comprobarEntrada($conexionBD,$_POST["asunto"]);
+$aviso = comprobarEntrada($conexionBD,$_POST["aviso"]);
 $autor = $_SESSION["usuario"]["username"];
 // error_log("Valores: ".$destinatario.", ".$autor.".");
 // var_dump($_SESSION["usuario"]["username"]);

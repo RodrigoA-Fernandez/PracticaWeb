@@ -2,8 +2,8 @@
 <?php
 session_start();
 if ( $_SERVER["REQUEST_METHOD"] == "POST") {
-  $contraseniaPost = htmlspecialchars($_POST["contrasenia"]);
-  $nuevaContraseniaPost = htmlspecialchars($_POST["nuevaContrasenia"]);
+  $contraseniaPost = comprobarEntrada($conexionBD,$_POST["contrasenia"]);
+  $nuevaContraseniaPost = comprobarEntrada($conexionBD,$_POST["nuevaContrasenia"]);
   $login= (comprobarLogin($conexionBD,$_SESSION["usuario"]["username"], hash("md5",$contraseniaPost))); 
   if($login != LOGIN_ESTUDIANTE){
     echo json_encode(array("cambio" => false, "causa" => "Contraseña antigua incorrecta"));

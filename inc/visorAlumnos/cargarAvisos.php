@@ -3,7 +3,7 @@
  comprobarEstudiante($conexionBD); 
 ?>
 <?php
-  $mensajes = getMensajesEstudiante($conexionBD, $_SESSION["usuario"]["username"],htmlspecialchars($_POST["filtro"]), $_POST["pagina"]);
+  $mensajes = getMensajesEstudiante($conexionBD, $_SESSION["usuario"]["username"],comprobarEntrada($conexionBD,$_POST["filtro"]), $_POST["pagina"]);
 
 for ($i=0; $i < count($mensajes) ; $i++) { 
   $fecha = strtotime($mensajes[$i]["Fecha"]);

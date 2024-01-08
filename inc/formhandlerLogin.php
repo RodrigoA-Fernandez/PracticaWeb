@@ -4,8 +4,8 @@
 session_start();
 // var_dump($_SERVER["REQUEST_METHOD"]);
 if ( $_SERVER["REQUEST_METHOD"] == "POST") {
-  $nombreUsuario = htmlspecialchars($_POST["nombreUsuario"]);
-  $contrasenia = htmlspecialchars($_POST["contrasenia"]);
+  $nombreUsuario = comprobarEntrada($conexionBD,$_POST["nombreUsuario"]);
+  $contrasenia = comprobarEntrada($conexionBD,$_POST["contrasenia"]);
   if($nombreUsuario == NULL ||$contrasenia == NULL){
     header("Location: ../index.php?falloLogin=sinLogin");
     exit();

@@ -1,7 +1,7 @@
 <?php include_once "../codigo_inicializacion.php"?>
 <?php
   $alumnos = getNombresAlumnos($conexionBD);
-  $alumno = htmlspecialchars($_POST["alumno"]);
+  $alumno = comprobarEntrada($conexionBD,$_POST["alumno"]);
   $band = false; 
   foreach ($alumnos as $a) {
     if ($a[0] == $alumno) {

@@ -1,8 +1,8 @@
 <?php include_once "../codigo_inicializacion.php"; ?>
 <?php
   $id = $_POST["id"];
-  $nombre = htmlspecialchars($_POST["nombre"]);
-  $login = htmlspecialchars($_POST["login"]);
+  $nombre = comprobarEntrada($conexionBD,$_POST["nombre"]);
+  $login = comprobarEntrada($conexionBD,$_POST["login"]);
   echo '  <td class="col-4"><input class="alumnos-input" id="nombre" placeholder="'.$nombre.'"></input></td>
           <td class="col-6"><input class="alumnos-input" id="login" placeholder='.$login.'></input></td>
           <td class="col-2">

@@ -11,10 +11,10 @@ if (!move_uploaded_file($_FILES["fichero"]["tmp_name"], $nom_fich_subido)) {
 $archivo = fopen($nom_fich_subido,'r');
 $band = true;
 while ($aviso = fgetcsv($archivo)) {
-  if(!comprobarNombreNia($conexionBD,htmlspecialchars($aviso[1]),htmlspecialchars($aviso[0]))){
+  if(!comprobarNombreNia($conexionBD,comprobarEntrada($conexionBD,$aviso[1]),comprobarEntrada($conexionBD,$aviso[0]))){
     $band = false;
   }
-  hacerAviso($conexionBD,htmlspecialchars($aviso[1]),htmlspecialchars($aviso[2]),htmlspecialchars($aviso[3]),$_SESSION["usuario"]["username"]);
+  hacerAviso($conexionBD,comprobarEntrada($conexionBD,$aviso[1]),comprobarEntrada($conexionBD,$aviso[2]),comprobarEntrada($conexionBD,$aviso[3]),$_SESSION["usuario"]["username"]);
 }
 
 if(!$band){

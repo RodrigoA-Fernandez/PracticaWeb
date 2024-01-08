@@ -1,6 +1,6 @@
 <?php include_once "../codigo_inicializacion.php"; ?>
 <?php
-$filtro = htmlspecialchars($_POST["filtro"]);
+$filtro = comprobarEntrada($conexionBD,$_POST["filtro"]);
 foreach (getAlumnos($conexionBD,$filtro) as $alumno) {
     echo'     <tr scope="row"  id = "'.$alumno[0].'">
                 <td class="col-4 nombre">'.$alumno[1].'</td>
