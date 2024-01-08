@@ -34,6 +34,7 @@
   include "plantilla.php";
   include "funcionesBD.php";
   include "comprobarTipoUsuario.php";
+  include "codigo_funciones.php";
 ?>
 
 

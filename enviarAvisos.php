@@ -30,6 +30,24 @@
 </form>
 
 
+<form class="enviar-contenedor container-md my-5  min-vh-50 text-center" enctype="multipart/form-data"  action="./inc/upload.php" method="POST" style="max-width: 300px;">
+  <div class="w-100" style="background-color: var(--color-secundario); font-family: 'Segoe UI Bold'; color: white; text-align: center;">
+    Subir fichero
+  </div>
+  <!-- MAX_FILE_SIZE debe preceder al campo de entrada del fichero -->
+  <input type="hidden" name="MAX_FILE_SIZE" value="500000" />
+  <!-- El nombre del elemento de entrada determina el nombre en el array $_FILES -->
+  <div>
+    <label class="boton mx-auto my-2" style="max-width: 150px;" for="subir" class="mt-2" style="font-family: 'Segoe UI';">
+      Elegir archivo
+   </label>
+  </div>
+  <input id="subir" type="file" name="fichero" style="display: none;"/>
+  <button class="boton my-2 mx-auto" value="Subir fichero" type="submit">
+    Subir Archivo
+  </button>
+</form>
+
 <?php piePlantilla()?>
 
 <script>
@@ -65,5 +83,24 @@ function comprobarMensaje(){
   return true;
 
 }
+</script>
+<script>
+$(function(){
+  $("#submit").on("click",function(){
+    console.log("a");
+  });
+
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const error = urlParams.get('error');
+  console.log(error);
+  if(error == 0){
+    alert("Avisos enviados");
+  }else if (error == 1){
+    alert("Error al leer el archivo.");
+  }else if (error == 2){
+    alert("Han habido avisos que no se han podido enviar.");
+  }
+});
 </script>
 <?php include_once "inc/codigo_finalizacion.php"; ?>

@@ -50,6 +50,7 @@ function cargarBotonera() {
     {
       pagActual: pagina,
       paginas: numPestanias,
+      filtro: $("#busqueda").val()
     },
     function () {
       asignarBotones();

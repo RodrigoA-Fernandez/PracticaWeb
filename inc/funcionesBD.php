@@ -341,7 +341,6 @@ WHERE UP.Login = ? AND (A.Contenido LIKE ? OR A.Asunto LIKE ?)
 GROUP BY A.Id
 HAVING COUNT(*) > 1)) AS T ORDER BY Fecha DESC LIMIT ?,?;';
 
-  error_log($login.", ".$patron);
 
   $unicosSQL = mysqli_stmt_init($conexionBD);
   $okflag = $unicosSQL -> prepare($sentenciaUnicos);
@@ -419,5 +418,28 @@ function modificarAlumno($conexionBD, $id, $nombre, $login){
   }
   $senteciaSQL ->execute();
   $senteciaSQL -> close();
+}
+?>
+<?php
+function comprobarNombreNia($conexionBD,$nombre,$nia){
+  $sentencia = "SELECT COUNT(*) FROM USUARIO_ESTUDIANTE WHERE Nombre = ? AND Nia = ? "; 
+  $sentenciaSQL = mysqli_stmt_init($conexionBD);
+  $okflag = $sentenciaSQL -> prepare($sentencia);
+  if ($okflag){
+    $sentenciaSQL -> bind_param("ss", $nombre, $nia);
+    $sentenciaSQL->execute();
+    $resultado = $sentenciaSQL -> get_result();
+    if (mysqli_num_rows($resultado) > 0) {
+			$fila= mysqli_fetch_assoc($resultado);
+		} else {
+			$fila= array();
+		}
+    mysqli_free_result($resultado);
+    mysqli_stmt_close($sentenciaSQL);
+    if ($fila["COUNT(*)"] == 1){
+      return true;
+    }
+  }
+  return false;
 }
 ?>

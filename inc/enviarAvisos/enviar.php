@@ -4,7 +4,7 @@ $destinatario = htmlspecialchars($_POST["destinatario"]);
 $asunto = htmlspecialchars($_POST["asunto"]);
 $aviso = htmlspecialchars($_POST["aviso"]);
 $autor = $_SESSION["usuario"]["username"];
-error_log("Valores: ".$destinatario.", ".$autor.".");
+// error_log("Valores: ".$destinatario.", ".$autor.".");
 // var_dump($_SESSION["usuario"]["username"]);
 $res = hacerAviso($conexionBD,$destinatario,$asunto,$aviso,$autor);
 if(!$res){

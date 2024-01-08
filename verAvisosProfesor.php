@@ -8,7 +8,14 @@
       
     </ul>
   </nav>
-
+  <div class="container max-vh-50 p-2 mensajes-busqueda">
+    <div class="input-group rounded">
+      <input type="search" id="busqueda" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+      <span class="input-group-text border-0" id="search-addon">
+        <img class="fas fa-search" src="./assets/lupa.png" id="buscar" width="20">
+      </span>
+    </div>
+  </div>
 <div class="mensajes-mensajes">
 
 <?php 

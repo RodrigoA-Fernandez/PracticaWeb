@@ -3,7 +3,7 @@
  comprobarProfesor($conexionBD); 
 ?>
 <?php
-  $mensajes = getMensajesProfesor($conexionBD, $_SESSION["usuario"]["username"],$_POST["filtro"], $_POST["pagina"]);
+  $mensajes = getMensajesProfesor($conexionBD, $_SESSION["usuario"]["username"],htmlspecialchars($_POST["filtro"]), $_POST["pagina"]);
 
 echo "<script>console.log(";
 echo json_encode($mensajes);
